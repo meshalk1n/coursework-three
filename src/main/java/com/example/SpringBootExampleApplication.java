@@ -1,11 +1,12 @@
 package com.example;
 
+import javafx.application.Application;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Application {
+public class SpringBootExampleApplication {
 
     public static void main(String[] args) {
-        javafx.application.Application.launch(JavaFxApplication.class, args);
+        Application.launch(JavaFxApplication.class, args);
     }
 }

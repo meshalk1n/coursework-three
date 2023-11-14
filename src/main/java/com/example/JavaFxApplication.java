@@ -1,31 +1,41 @@
 package com.example;
 
-import javafx.application.Platform;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import com.example.controller.MainController;
+import com.example.controller.MyController;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
-import javafx.scene.control.Label;
 
-public class JavaFxApplication extends javafx.application.Application {
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import net.rgielen.fxweaver.core.FxWeaver;
+
+public class JavaFxApplication extends Application {
     private ConfigurableApplicationContext applicationContext;
 
     @Override
     public void init() {
-        applicationContext = new SpringApplicationBuilder(Application.class).run();
+        String[] args = getParameters().getRaw().toArray(new String[0]);
+
+        this.applicationContext = new SpringApplicationBuilder()
+                .sources(SpringBootExampleApplication.class)
+                .run(args);
     }
 
     @Override
     public void start(Stage stage) {
-        Label label = new Label("Hello, JavaFX with Spring Boot!");
-        Scene scene = new Scene(label, 200, 100);
+        FxWeaver fxWeaver = applicationContext.getBean(FxWeaver.class);
+        Parent root = fxWeaver.loadView(MainController.class);
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
     @Override
     public void stop() {
-        applicationContext.close();
+        this.applicationContext.close();
         Platform.exit();
     }
 }
