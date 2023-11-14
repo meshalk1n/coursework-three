@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-@FxmlView("com.example/main-stage.fxml")
+@FxmlView("/com.example/main.fxml")
 public class MyController {
 
     private final WeatherService weatherService;
