@@ -1,5 +1,6 @@
-package com.example;
+package com.example.controller;
 
+import com.example.service.WeatherService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -8,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-@FxmlView("/com.example/main.fxml")
+@FxmlView("/com.example.controller/main.fxml")
 public class MyController {
 
     private final WeatherService weatherService;
