@@ -8,7 +8,7 @@
 <?import javafx.scene.control.Button?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.controller.MainControllerTwo">
+      fx:controller="com.example.controller.MainController">
 
     <ListView fx:id="listView" VBox.vgrow="ALWAYS"/>
 
@@ -16,5 +16,7 @@
         <TextField fx:id="usernameField" promptText="Username"/>
         <TextField fx:id="passwordField" promptText="Password"/>
         <Button text="Save" onAction="#saveUser"/>
+        <Button text="Delete" onAction="#deleteUser"/>
+        <Button text="Update" onAction="#updateUser"/>
     </HBox>
 </VBox>

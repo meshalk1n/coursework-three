@@ -3,20 +3,25 @@ package com.example.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "user")
-public class UserEntity {
+@Table(name = "user_entity")
+public class User {
+
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(name = "username")
     private String username;
+
+    @Column(name = "password")
     private String password;
 
-    public UserEntity(){
+    public User(){
 
     }
 
-    public UserEntity(String username, String password){
+    public User(String username, String password){
         this.username = username;
         this.password = password;
     }
@@ -43,5 +48,10 @@ public class UserEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return username + " " + password;
     }
 }

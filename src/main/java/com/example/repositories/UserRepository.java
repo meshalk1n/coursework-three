@@ -1,12 +1,11 @@
 package com.example.repositories;
 
 
-import com.example.entity.UserEntity;
+import com.example.entity.User;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-
-public interface UserRepository extends CrudRepository<UserEntity, Integer> {
-    List<UserEntity> findAll();
+public interface UserRepository extends CrudRepository<User, Integer> {
+    List<User> findAll();
 }

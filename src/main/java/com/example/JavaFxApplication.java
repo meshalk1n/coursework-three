@@ -1,6 +1,6 @@
 package com.example;
 
-import com.example.controller.MainControllerTwo;
+import com.example.controller.MainController;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
@@ -26,7 +26,7 @@ public class JavaFxApplication extends Application {
     @Override
     public void start(Stage stage) {
         FxWeaver fxWeaver = applicationContext.getBean(FxWeaver.class);
-        Parent root = fxWeaver.loadView(MainControllerTwo.class);
+        Parent root = fxWeaver.loadView(MainController.class);
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
