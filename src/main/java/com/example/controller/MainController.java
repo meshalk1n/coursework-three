@@ -44,7 +44,6 @@ public class MainController {
         newUser.setUsername(usernameField.getText());
         newUser.setPassword(passwordField.getText());
         userRepository.save(newUser);
-
         // Обновление отображения списка
         updateListView();
     }
@@ -73,7 +72,7 @@ public class MainController {
     }
 
     private void updateListView() {
-        List<User> users = userRepository.findAll();
+        List<User> users = (List<User>) userRepository.findAll();
         listView.getItems().setAll(users);
     }
 }
