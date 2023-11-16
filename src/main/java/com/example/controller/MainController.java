@@ -1,7 +1,7 @@
 package com.example.controller;
 
 import com.example.entity.User;
-import com.example.repositories.UserRepository;
+import com.example.service.UserService;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -24,11 +24,11 @@ public class MainController {
     @FXML
     private ListView<User> listView;
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
     @Autowired
-    public MainController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public MainController(UserService userService) {
+        this.userService = userService;
     }
 
 
@@ -43,7 +43,7 @@ public class MainController {
         User newUser = new User();
         newUser.setUsername(usernameField.getText());
         newUser.setPassword(passwordField.getText());
-        userRepository.save(newUser);
+        userService.saveUser(newUser);
         // Обновление отображения списка
         updateListView();
     }
@@ -53,7 +53,7 @@ public class MainController {
     public void deleteUser() {
         User selectedUser = listView.getSelectionModel().getSelectedItem();
         if (selectedUser != null) {
-            userRepository.delete(selectedUser);
+            userService.deleteUser(selectedUser);
             // Обновление отображения списка
             updateListView();
         }
@@ -65,14 +65,14 @@ public class MainController {
         if (selectedUser != null) {
             selectedUser.setUsername(usernameField.getText());
             selectedUser.setPassword(passwordField.getText());
-            userRepository.save(selectedUser);
+            userService.updateUser(selectedUser);
             // Обновление отображения списка
             updateListView();
         }
     }
 
     private void updateListView() {
-        List<User> users = (List<User>) userRepository.findAll();
+        List<User> users = userService.getAllUsers();
         listView.getItems().setAll(users);
     }
 }
