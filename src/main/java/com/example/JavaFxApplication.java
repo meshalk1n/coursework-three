@@ -37,4 +37,8 @@ public class JavaFxApplication extends Application {
         this.applicationContext.close();
         Platform.exit();
     }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
