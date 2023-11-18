@@ -6,9 +6,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.geometry.Insets?>
 
+<?import javafx.scene.control.Label?>
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.controller.LoginController">
     <TextField fx:id="usernameField" />
     <PasswordField fx:id="passwordField" />
+    <Label fx:id="errorMessageLabel" textFill="red" />
 
     <!-- Пример использования padding с Insets для Button -->
     <Button text="Login" onAction="#login">

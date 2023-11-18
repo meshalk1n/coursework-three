@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.entity.User;
 import com.example.service.UserService;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -14,8 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-@FxmlView("/com.example.controller/login.fxml")
-public class LoginController {
+@FxmlView("/com.example.controller/register.fxml")
+public class RegisterController {
 
     @FXML
     public Label errorMessageLabel;
@@ -26,46 +27,36 @@ public class LoginController {
     @FXML
     private PasswordField passwordField;
 
-    private final UserService userService;
-
     private final FxWeaver fxWeaver;
 
+    private final UserService userService;
+
     @Autowired
-    public LoginController(UserService userService, FxWeaver fxWeaver) {
-        this.userService = userService;
+    public RegisterController(FxWeaver fxWeaver, UserService userService) {
         this.fxWeaver = fxWeaver;
+        this.userService = userService;
     }
 
     @FXML
-    private void login() {
+    public void register() {
         String username = usernameField.getText();
         String password = passwordField.getText();
-        if (isValidCredentials(username, password)) {
-            openSecondMainForm();
+
+        if (checkExistence(username)){
+            errorMessageLabel.setText("Error");
         } else {
-            errorMessageLabel.setText("Invalid credentials!");
+            User newUser = new User(username, password);
+            userService.saveUser(newUser);
+            openLoginForm();
         }
     }
 
-    private void openSecondMainForm(){
-        Parent root = fxWeaver.loadView(MainController.class);
-        Scene scene = new Scene(root);
-        Stage stage = (Stage) usernameField.getScene().getWindow(); // Получаем текущий Stage
-        stage.setScene(scene);
-        stage.show();
+    private boolean checkExistence(String username){
+        return userService.getUserByUsername(username) != null;
     }
 
-    private boolean isValidCredentials(String username, String password) {
-        return userService.getUserByUsernameAndPassword(username, password) != null;
-    }
-
-    @FXML
-    private void register() {
-        openRegisterForm();
-    }
-
-    private void openRegisterForm(){
-        Parent root = fxWeaver.loadView(RegisterController.class);
+    private void openLoginForm(){
+        Parent root = fxWeaver.loadView(LoginController.class);
         Scene scene = new Scene(root);
         Stage stage = (Stage) usernameField.getScene().getWindow(); // Получаем текущий Stage
         stage.setScene(scene);
