@@ -18,7 +18,7 @@ public class UserService {
     }
 
     public List<User> getAllUsers() {
-        return (List<User>) userRepository.findAll();
+        return userRepository.findAll();
     }
 
     public void saveUser(User user) {
@@ -31,5 +31,9 @@ public class UserService {
 
     public void updateUser(User user) {
         userRepository.save(user);
+    }
+
+    public User getUserByUsernameAndPassword(String username, String password){
+        return userRepository.findByUsernameAndPassword(username, password);
     }
 }

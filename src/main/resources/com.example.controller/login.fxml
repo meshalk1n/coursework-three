@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.controller.LoginController">
+    <TextField fx:id="usernameField" />
+    <PasswordField fx:id="passwordField" />
+
+    <!-- Пример использования padding с Insets для Button -->
+    <Button text="Login" onAction="#login">
+        <padding>
+            <Insets top="10" right="20" bottom="10" left="20" />
+        </padding>
+    </Button>
+
+    <Button text="Register" onAction="#register">
+        <padding>
+            <Insets top="10" right="20" bottom="10" left="20" />
+        </padding>
+    </Button>
+
+    <!-- Другие элементы управления и разметка -->
+
+</VBox>
