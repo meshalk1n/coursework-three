@@ -30,7 +30,13 @@ public class UserService {
     }
 
     public void updateUser(User user) {
-        userRepository.save(user);
+        // Обновление пользователя, только если у пользователя уже есть id
+        if (user.getId() != 0) {
+            userRepository.save(user);
+        } else {
+            // Можете добавить обработку, если пользователя с указанным id не существует.
+            // Например, вы можете вывести сообщение об ошибке.
+        }
     }
 
     public User getUserByUsernameAndPassword(String username, String password){

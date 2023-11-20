@@ -77,11 +77,17 @@ public class MainController {
     public void updateUser() {
         User selectedUser = tableView.getSelectionModel().getSelectedItem();
         if (selectedUser != null) {
+            // Получение данных из полей ввода
             selectedUser.setUsername(usernameField.getText());
             selectedUser.setPassword(passwordField.getText());
+
+            // Вызов метода updateUser в сервисе
             userService.updateUser(selectedUser);
+
             // Обновление отображения таблицы
             updateTableView();
+        } else {
+            // Если ни один пользователь не выбран, можете вывести сообщение об ошибке или предпринять другие действия.
         }
     }
 
