@@ -5,6 +5,7 @@ import com.example.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -22,6 +23,7 @@ public class UserService {
     }
 
     public void saveUser(User user) {
+        user.setCreationDate(LocalDateTime.now());
         userRepository.save(user);
     }
 
@@ -45,5 +47,9 @@ public class UserService {
 
     public User getUserByUsername(String username){
         return userRepository.findByUsername(username);
+    }
+
+    public User getUserByEmail(String email){
+        return userRepository.findByEmail(email);
     }
 }

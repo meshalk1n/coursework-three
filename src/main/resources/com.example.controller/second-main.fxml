@@ -14,12 +14,17 @@
             <TableColumn fx:id="idColumn" text="ID"/>
             <TableColumn fx:id="usernameColumn" text="Username"/>
             <TableColumn fx:id="passwordColumn" text="Password"/>
+            <TableColumn fx:id="roleColumn" text="Role"/>
+            <TableColumn fx:id="emailColumn" text="Email"/>
+            <TableColumn fx:id="creationDateColumn" text="creation_date"/>
         </columns>
     </TableView>
 
     <HBox>
         <TextField fx:id="usernameField" promptText="Username"/>
         <TextField fx:id="passwordField" promptText="Password"/>
+        <TextField fx:id="roleField" promptText="Role"/>
+        <TextField fx:id="emailField" promptText="Email"/>
         <Button text="Save" onAction="#saveUser"/>
         <Button text="Delete" onAction="#deleteUser"/>
         <Button text="Update" onAction="#updateUser"/>

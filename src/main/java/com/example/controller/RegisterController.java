@@ -22,10 +22,16 @@ public class RegisterController {
     public Label errorMessageLabel;
 
     @FXML
-    private TextField usernameField;
+    public TextField roleField;
 
     @FXML
-    private PasswordField passwordField;
+    public TextField emailField;
+
+    @FXML
+    public TextField usernameField;
+
+    @FXML
+    public PasswordField passwordField;
 
     private final FxWeaver fxWeaver;
 
@@ -41,18 +47,20 @@ public class RegisterController {
     public void register() {
         String username = usernameField.getText();
         String password = passwordField.getText();
+        String role = roleField.getText();
+        String email = emailField.getText();
 
-        if (checkExistence(username)){
+        if (checkExistence(username, email)){
             errorMessageLabel.setText("Error");
         } else {
-            User newUser = new User(username, password);
+            User newUser = new User(username, password, role, email);
             userService.saveUser(newUser);
             openLoginForm();
         }
     }
 
-    private boolean checkExistence(String username){
-        return userService.getUserByUsername(username) != null;
+    private boolean checkExistence(String username, String email){
+        return userService.getUserByUsername(username) != null || userService.getUserByEmail(email) != null;
     }
 
     private void openLoginForm(){

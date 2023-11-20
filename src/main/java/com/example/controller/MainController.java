@@ -27,6 +27,21 @@ public class MainController {
     public TableColumn idColumn;
 
     @FXML
+    public TableColumn roleColumn;
+
+    @FXML
+    public TableColumn emailColumn;
+
+    @FXML
+    public TableColumn creationDateColumn;
+
+    @FXML
+    public TextField roleField;
+
+    @FXML
+    public TextField emailField;
+
+    @FXML
     private TextField usernameField;
 
     @FXML
@@ -48,6 +63,9 @@ public class MainController {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
         passwordColumn.setCellValueFactory(new PropertyValueFactory<>("password"));
+        roleColumn.setCellValueFactory(new PropertyValueFactory<>("role"));
+        emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
+        creationDateColumn.setCellValueFactory(new PropertyValueFactory<>("creationDate"));
 
         // Загрузка пользователей при инициализации
         updateTableView();
@@ -58,6 +76,8 @@ public class MainController {
         User newUser = new User();
         newUser.setUsername(usernameField.getText());
         newUser.setPassword(passwordField.getText());
+        newUser.setRole(roleField.getText());
+        newUser.setEmail(emailField.getText());
         userService.saveUser(newUser);
         // Обновление отображения таблицы
         updateTableView();
@@ -80,6 +100,8 @@ public class MainController {
             // Получение данных из полей ввода
             selectedUser.setUsername(usernameField.getText());
             selectedUser.setPassword(passwordField.getText());
+            selectedUser.setRole(roleField.getText());
+            selectedUser.setEmail(emailField.getText());
 
             // Вызов метода updateUser в сервисе
             userService.updateUser(selectedUser);
