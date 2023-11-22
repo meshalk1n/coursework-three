@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import com.example.entity.User;
+import com.example.service.CurrentUserService;
 import com.example.service.UserService;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -11,6 +13,7 @@ import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -30,17 +33,21 @@ public class LoginController {
 
     private final FxWeaver fxWeaver;
 
+    private CurrentUserService currentUserService;
     @Autowired
-    public LoginController(UserService userService, FxWeaver fxWeaver) {
+    public LoginController(UserService userService, FxWeaver fxWeaver, CurrentUserService currentUserService) {
         this.userService = userService;
         this.fxWeaver = fxWeaver;
+        this.currentUserService = currentUserService;
     }
 
     @FXML
     private void login() {
         String username = usernameField.getText();
         String password = passwordField.getText();
-        if (isValidCredentials(username, password)) {
+        User loggedInUser = userService.getUserByUsernameAndPassword(username, password);
+        if (loggedInUser != null) {
+            currentUserService.setCurrentUser(loggedInUser);
             openSecondMainForm();
         } else {
             errorMessageLabel.setText("Invalid credentials!");

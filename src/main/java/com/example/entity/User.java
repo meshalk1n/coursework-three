@@ -27,6 +27,9 @@ public class User {
     @Column(name = "creation_date")
     private LocalDateTime creationDate;
 
+    @Column(name = "last_modified_by")
+    private String lastModifiedBy;
+
     public User(){
 
     }
@@ -36,6 +39,14 @@ public class User {
         this.password = password;
         this.role = role;
         this.email = email;
+    }
+
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
     }
 
     public int getId() {
@@ -88,6 +99,6 @@ public class User {
 
     @Override
     public String toString() {
-        return id + username + password + role + creationDate;
+        return id + username + password + role + creationDate + lastModifiedBy;
     }
 }

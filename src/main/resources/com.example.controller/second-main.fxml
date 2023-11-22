@@ -17,6 +17,7 @@
             <TableColumn fx:id="roleColumn" text="Role"/>
             <TableColumn fx:id="emailColumn" text="Email"/>
             <TableColumn fx:id="creationDateColumn" text="creation_date"/>
+            <TableColumn fx:id="lastModifiedByColumn" text="last_modified_by"/>
         </columns>
     </TableView>
 

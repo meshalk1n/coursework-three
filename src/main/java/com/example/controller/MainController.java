@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.example.entity.User;
+import com.example.service.CurrentUserService;
 import com.example.service.UserService;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
@@ -42,6 +43,9 @@ public class MainController {
     public TextField emailField;
 
     @FXML
+    public TableColumn lastModifiedByColumn;
+
+    @FXML
     private TextField usernameField;
 
     @FXML
@@ -52,11 +56,13 @@ public class MainController {
 
     private final UserService userService;
 
-    @Autowired
-    public MainController(UserService userService) {
-        this.userService = userService;
-    }
+    private CurrentUserService currentUserService;
 
+    @Autowired
+    public MainController(UserService userService, CurrentUserService currentUserService) {
+        this.userService = userService;
+        this.currentUserService = currentUserService;
+    }
     @FXML
     public void initialize() {
         // Связывание столбцов таблицы с полями объектов User
@@ -66,6 +72,8 @@ public class MainController {
         roleColumn.setCellValueFactory(new PropertyValueFactory<>("role"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
         creationDateColumn.setCellValueFactory(new PropertyValueFactory<>("creationDate"));
+
+        lastModifiedByColumn.setCellValueFactory(new PropertyValueFactory<>("lastModifiedBy"));
 
         // Загрузка пользователей при инициализации
         updateTableView();
@@ -103,8 +111,8 @@ public class MainController {
             selectedUser.setRole(roleField.getText());
             selectedUser.setEmail(emailField.getText());
 
-            // Вызов метода updateUser в сервисе
-            userService.updateUser(selectedUser);
+            // Вызов метода updateUser в сервисе с указанием текущего пользователя
+            userService.updateUser(selectedUser, currentUserService.getCurrentUser().getUsername());;
 
             // Обновление отображения таблицы
             updateTableView();

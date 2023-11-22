@@ -31,9 +31,10 @@ public class UserService {
         userRepository.delete(user);
     }
 
-    public void updateUser(User user) {
+    public void updateUser(User user, String modifiedBy) {
         // Обновление пользователя, только если у пользователя уже есть id
         if (user.getId() != 0) {
+            user.setLastModifiedBy(modifiedBy);
             userRepository.save(user);
         } else {
             // Можете добавить обработку, если пользователя с указанным id не существует.
