@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -52,5 +53,9 @@ public class UserService {
 
     public User getUserByEmail(String email){
         return userRepository.findByEmail(email);
+    }
+
+    public List<User> getUsersByRoleContains(String role) {
+        return userRepository.findByRoleContains(role);
     }
 }

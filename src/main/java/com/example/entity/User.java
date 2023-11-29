@@ -2,6 +2,8 @@ package com.example.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -18,9 +20,6 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "role")
-    private String role;
-
     @Column(name = "email")
     private String email;
 
@@ -30,6 +29,9 @@ public class User {
     @Column(name = "last_modified_by")
     private String lastModifiedBy;
 
+    @Column(name = "role")
+    private String role;
+
     public User(){
 
     }
@@ -37,8 +39,16 @@ public class User {
     public User(String username, String password, String role, String email) {
         this.username = username;
         this.password = password;
-        this.role = role;
         this.email = email;
+        this.role = role;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getLastModifiedBy() {
@@ -73,16 +83,8 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() {
-        return role;
-    }
-
     public LocalDateTime getCreationDate() {
         return creationDate;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 
     public String getEmail() {
@@ -95,6 +97,17 @@ public class User {
 
     public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id && Objects.equals(username, user.username) && Objects.equals(password,
+                user.password) && Objects.equals(email, user.email) && Objects.equals(creationDate,
+                user.creationDate) && Objects.equals(lastModifiedBy, user.lastModifiedBy) && Objects.equals(role,
+                user.role);
     }
 
     @Override

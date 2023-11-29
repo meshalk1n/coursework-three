@@ -13,8 +13,8 @@ import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
 
 @Component
 @FxmlView("/com.example.controller/login.fxml")
@@ -48,16 +48,34 @@ public class LoginController {
         User loggedInUser = userService.getUserByUsernameAndPassword(username, password);
         if (loggedInUser != null) {
             currentUserService.setCurrentUser(loggedInUser);
-            openSecondMainForm();
+
+            // Проверьте роли и откройте соответствующую форму
+            if  (userService.getUsersByRoleContains("ROLE_ADMIN").contains(loggedInUser))  {
+                openAdminForm();
+                System.out.println("АДМИН");
+            } else {
+                System.out.println("ПОЛЬЗОВАТЕЛИ");
+                openUserForm();
+            }
         } else {
-            errorMessageLabel.setText("Invalid credentials!");
+            errorMessageLabel.setText("Неверные учетные данные!");
         }
     }
 
-    private void openSecondMainForm(){
-        Parent root = fxWeaver.loadView(MainController.class);
+    private void openAdminForm() {
+        // Загрузите и покажите форму администратора
+        Parent root = fxWeaver.loadView(AdminFormController.class);
         Scene scene = new Scene(root);
-        Stage stage = (Stage) usernameField.getScene().getWindow(); // Получаем текущий Stage
+        Stage stage = (Stage) usernameField.getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    private void openUserForm() {
+        // Загрузите и покажите форму пользователя
+        Parent root = fxWeaver.loadView(UserFormController.class);
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) usernameField.getScene().getWindow();
         stage.setScene(scene);
         stage.show();
     }

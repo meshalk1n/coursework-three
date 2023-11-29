@@ -7,7 +7,7 @@
 <?import javafx.scene.control.Button?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.controller.MainController">
+      fx:controller="com.example.controller.AdminFormController">
 
     <TableView fx:id="tableView" VBox.vgrow="ALWAYS">
         <columns>
@@ -16,8 +16,8 @@
             <TableColumn fx:id="passwordColumn" text="Password"/>
             <TableColumn fx:id="roleColumn" text="Role"/>
             <TableColumn fx:id="emailColumn" text="Email"/>
-            <TableColumn fx:id="creationDateColumn" text="creation_date"/>
-            <TableColumn fx:id="lastModifiedByColumn" text="last_modified_by"/>
+            <TableColumn fx:id="creationDateColumn" text="Creation Date"/>
+            <TableColumn fx:id="lastModifiedByColumn" text="Last Modified By"/>
         </columns>
     </TableView>
 

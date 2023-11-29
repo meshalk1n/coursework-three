@@ -15,8 +15,8 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-@FxmlView("/com.example.controller/second-main.fxml")
-public class MainController {
+@FxmlView("/com.example.controller/admin-form.fxml")
+public class AdminFormController {
 
     @FXML
     public TableColumn usernameColumn;
@@ -59,7 +59,7 @@ public class MainController {
     private CurrentUserService currentUserService;
 
     @Autowired
-    public MainController(UserService userService, CurrentUserService currentUserService) {
+    public AdminFormController(UserService userService, CurrentUserService currentUserService) {
         this.userService = userService;
         this.currentUserService = currentUserService;
     }
@@ -72,7 +72,6 @@ public class MainController {
         roleColumn.setCellValueFactory(new PropertyValueFactory<>("role"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
         creationDateColumn.setCellValueFactory(new PropertyValueFactory<>("creationDate"));
-
         lastModifiedByColumn.setCellValueFactory(new PropertyValueFactory<>("lastModifiedBy"));
 
         // Загрузка пользователей при инициализации

@@ -14,6 +14,8 @@ import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
+
 @Component
 @FxmlView("/com.example.controller/register.fxml")
 public class RegisterController {
