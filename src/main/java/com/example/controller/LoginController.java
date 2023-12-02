@@ -24,16 +24,19 @@ public class LoginController {
     public Label errorMessageLabel;
 
     @FXML
-    private TextField usernameField;
+    public TextField usernameField;
 
     @FXML
-    private PasswordField passwordField;
+    public PasswordField passwordField;
 
     private final UserService userService;
 
     private final FxWeaver fxWeaver;
 
-    private CurrentUserService currentUserService;
+    private final CurrentUserService currentUserService;
+
+    private User loggedInUser;
+
     @Autowired
     public LoginController(UserService userService, FxWeaver fxWeaver, CurrentUserService currentUserService) {
         this.userService = userService;
@@ -45,7 +48,7 @@ public class LoginController {
     private void login() {
         String username = usernameField.getText();
         String password = passwordField.getText();
-        User loggedInUser = userService.getUserByUsernameAndPassword(username, password);
+        this.loggedInUser = userService.getUserByUsernameAndPassword(username, password);
         if (loggedInUser != null) {
             currentUserService.setCurrentUser(loggedInUser);
 
@@ -54,16 +57,19 @@ public class LoginController {
                 openAdminForm();
                 System.out.println("АДМИН");
             } else {
-                System.out.println("ПОЛЬЗОВАТЕЛИ");
                 openUserForm();
+                System.out.println("ПОЛЬЗОВАТЕЛЬ");
             }
         } else {
             errorMessageLabel.setText("Неверные учетные данные!");
         }
     }
 
+    public User getCurrentLoggedInUser() {
+        return loggedInUser;
+    }
+
     private void openAdminForm() {
-        // Загрузите и покажите форму администратора
         Parent root = fxWeaver.loadView(AdminFormController.class);
         Scene scene = new Scene(root);
         Stage stage = (Stage) usernameField.getScene().getWindow();
@@ -72,16 +78,11 @@ public class LoginController {
     }
 
     private void openUserForm() {
-        // Загрузите и покажите форму пользователя
         Parent root = fxWeaver.loadView(UserFormController.class);
         Scene scene = new Scene(root);
         Stage stage = (Stage) usernameField.getScene().getWindow();
         stage.setScene(scene);
         stage.show();
-    }
-
-    private boolean isValidCredentials(String username, String password) {
-        return userService.getUserByUsernameAndPassword(username, password) != null;
     }
 
     @FXML
@@ -92,7 +93,7 @@ public class LoginController {
     private void openRegisterForm(){
         Parent root = fxWeaver.loadView(RegisterController.class);
         Scene scene = new Scene(root);
-        Stage stage = (Stage) usernameField.getScene().getWindow(); // Получаем текущий Stage
+        Stage stage = (Stage) usernameField.getScene().getWindow();
         stage.setScene(scene);
         stage.show();
     }
