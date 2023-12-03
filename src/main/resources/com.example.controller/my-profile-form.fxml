@@ -6,8 +6,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="245.0" prefWidth="316.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controller.MyProfileFormController">
-
+<VBox prefHeight="245.0" prefWidth="316.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.controller.MyProfileFormController">
     <padding>
         <Insets bottom="20" left="20" right="20" top="20" />
     </padding>

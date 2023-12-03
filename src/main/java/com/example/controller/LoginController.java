@@ -35,6 +35,7 @@ public class LoginController {
 
     private final CurrentUserService currentUserService;
 
+    @FXML
     private User loggedInUser;
 
     @Autowired
@@ -65,6 +66,7 @@ public class LoginController {
         }
     }
 
+    @FXML
     public User getCurrentLoggedInUser() {
         return loggedInUser;
     }
