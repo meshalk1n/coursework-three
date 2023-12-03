@@ -7,7 +7,7 @@
 <?import javafx.geometry.Insets?>
 
 <?import javafx.scene.control.Label?>
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.controller.LoginController">
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.controllers.LoginFormController">
     <TextField fx:id="usernameField" />
     <PasswordField fx:id="passwordField" />
     <Label fx:id="errorMessageLabel" textFill="red" />

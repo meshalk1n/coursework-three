@@ -1,8 +1,8 @@
-package com.example.controller;
+package com.example.controllers;
 
-import com.example.entity.User;
-import com.example.service.CurrentUserService;
-import com.example.service.UserService;
+import com.example.models.User;
+import com.example.services.AuthenticatedUserService;
+import com.example.services.UserService;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -10,12 +10,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 
 import java.util.List;
 
-@Component
-@FxmlView("/com.example.controller/admin-form.fxml")
+@Controller
+@FxmlView("/com/example/fxml/admin-form.fxml")
 public class AdminFormController {
 
     @FXML
@@ -56,12 +56,12 @@ public class AdminFormController {
 
     private final UserService userService;
 
-    private CurrentUserService currentUserService;
+    private AuthenticatedUserService authenticatedUserService;
 
     @Autowired
-    public AdminFormController(UserService userService, CurrentUserService currentUserService) {
+    public AdminFormController(UserService userService, AuthenticatedUserService authenticatedUserService) {
         this.userService = userService;
-        this.currentUserService = currentUserService;
+        this.authenticatedUserService = authenticatedUserService;
     }
     @FXML
     public void initialize() {
@@ -111,7 +111,7 @@ public class AdminFormController {
             selectedUser.setEmail(emailField.getText());
 
             // Вызов метода updateUser в сервисе с указанием текущего пользователя
-            userService.updateUser(selectedUser, currentUserService.getCurrentUser().getUsername());;
+            userService.updateUser(selectedUser, authenticatedUserService.getActiveUser().getUsername());;
 
             // Обновление отображения таблицы
             updateTableView();

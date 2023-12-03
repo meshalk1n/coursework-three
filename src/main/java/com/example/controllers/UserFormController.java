@@ -1,6 +1,6 @@
-package com.example.controller;
+package com.example.controllers;
 
-import com.example.entity.User;
+import com.example.models.User;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -9,13 +9,13 @@ import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 
-@Component
-@FxmlView("/com.example.controller/user-form.fxml")
+@Controller
+@FxmlView("/com/example/fxml/user-form.fxml")
 public class UserFormController {
 
-    private final LoginController loginController;
+    private final LoginFormController loginFormController;
     @FXML
     public Button myProfileButton;
 
@@ -23,8 +23,8 @@ public class UserFormController {
 
 
     @Autowired
-    public UserFormController(LoginController loginController, FxWeaver fxWeaver){
-        this.loginController = loginController;
+    public UserFormController(LoginFormController loginFormController, FxWeaver fxWeaver){
+        this.loginFormController = loginFormController;
         this.fxWeaver = fxWeaver;
     }
 
@@ -41,7 +41,7 @@ public class UserFormController {
     private void openMyProfileForm() {
 
         // Устанавливаем данные пользователя
-        User loggedInUser = loginController.getCurrentLoggedInUser();
+        User loggedInUser = loginFormController.getCurrentLoggedInUser();
 
         if (loggedInUser != null) {
             MyProfileFormController myProfileFormController = fxWeaver.loadController(MyProfileFormController.class);

@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EnableJpaRepositories("com.example.repositories")
-@EntityScan("com.example.entity")
+@EntityScan("com.example.models")
 public class SpringBootExampleApplication {
     public static void main(String[] args) {
         Application.launch(JavaFxApplication.class, args);
