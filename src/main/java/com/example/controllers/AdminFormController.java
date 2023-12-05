@@ -54,6 +54,9 @@ public class AdminFormController {
     public Button backButton;
 
     @FXML
+    public Button clearButton;
+
+    @FXML
     private TextField usernameField;
 
     @FXML
@@ -64,7 +67,7 @@ public class AdminFormController {
 
     private final UserService userService;
 
-    private AuthenticatedUserService authenticatedUserService;
+    private final AuthenticatedUserService authenticatedUserService;
 
     private final FxWeaver fxWeaver;
 
@@ -88,6 +91,17 @@ public class AdminFormController {
 
         // Загрузка пользователей при инициализации
         updateTableView();
+
+        // Добавление слушателя для выбора строки в таблице
+        tableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                // Заполнение полей данными выбранного пользователя
+                usernameField.setText(newValue.getUsername());
+                passwordField.setText(newValue.getPassword());
+                roleField.setText(newValue.getRole());
+                emailField.setText(newValue.getEmail());
+            }
+        });
     }
 
     @FXML
@@ -148,5 +162,13 @@ public class AdminFormController {
         Stage stage = (Stage) backButton.getScene().getWindow();
         stage.setScene(scene);
         stage.show();
+    }
+
+    @FXML
+    public void clear() {
+        usernameField.clear();
+        passwordField.clear();
+        roleField.clear();
+        emailField.clear();
     }
 }

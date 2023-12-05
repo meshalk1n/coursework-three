@@ -30,5 +30,6 @@
         <Button onAction="#saveUser" text="Save" />
         <Button onAction="#deleteUser" text="Delete" />
         <Button onAction="#updateUser" text="Update" />
+      <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clear" prefHeight="25.0" prefWidth="51.0" text="Clear" />
     </HBox>
 </VBox>
