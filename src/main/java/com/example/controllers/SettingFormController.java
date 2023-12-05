@@ -12,18 +12,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 @Controller
-@FxmlView("/com/example/fxml/user-form.fxml")
-public class UserFormController {
+@FxmlView("/com/example/fxml/setting-form.fxml")
+public class SettingFormController {
 
-    private final LoginFormController loginFormController;
     @FXML
     public Button myProfileButton;
 
+    private final LoginFormController loginFormController;
+
     private final FxWeaver fxWeaver;
 
-
     @Autowired
-    public UserFormController(LoginFormController loginFormController, FxWeaver fxWeaver){
+    public SettingFormController(LoginFormController loginFormController, FxWeaver fxWeaver){
         this.loginFormController = loginFormController;
         this.fxWeaver = fxWeaver;
     }
@@ -33,11 +33,6 @@ public class UserFormController {
         openMyProfileForm();
     }
 
-    /*
-    TODO: Здесь нужно использовать такой переход, проблема связана с тем,
-     как JavaFX и Spring взаимодействуют друг с другом.
-     FxWeaver - это библиотека, которая позволяет Spring и JavaFX работать вместе более гладко.
-     */
     private void openMyProfileForm() {
 
         // Устанавливаем данные пользователя
