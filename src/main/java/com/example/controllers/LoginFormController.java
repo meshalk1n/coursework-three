@@ -55,10 +55,10 @@ public class LoginFormController {
 
             // Проверьте роли и откройте соответствующую форму
             if  (userService.getUsersByRoleContains("ROLE_ADMIN").contains(loggedInUser))  {
-                openAdminForm();
+                openMainForm();
                 System.out.println("АДМИН");
             } else {
-                openUserForm();
+                openMainForm();
                 System.out.println("ПОЛЬЗОВАТЕЛЬ");
             }
         } else {
@@ -71,16 +71,8 @@ public class LoginFormController {
         return loggedInUser;
     }
 
-    private void openAdminForm() {
-        Parent root = fxWeaver.loadView(AdminFormController.class);
-        Scene scene = new Scene(root);
-        Stage stage = (Stage) usernameField.getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    private void openUserForm() {
-        Parent root = fxWeaver.loadView(UserFormController.class);
+    private void openMainForm() {
+        Parent root = fxWeaver.loadView(MainFormController.class);
         Scene scene = new Scene(root);
         Stage stage = (Stage) usernameField.getScene().getWindow();
         stage.setScene(scene);
