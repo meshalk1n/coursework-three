@@ -8,4 +8,5 @@
    <Button fx:id="viewAssetsButton" layoutX="211.0" layoutY="152.0" mnemonicParsing="false" onAction="#viewAssets" prefHeight="25.0" prefWidth="179.0" text="Просмотреть активы" />
    <Button fx:id="settingButton" layoutX="211.0" layoutY="224.0" mnemonicParsing="false" onAction="#setting" prefHeight="25.0" prefWidth="179.0" text="Настройки" />
    <Button fx:id="adminFormButton" layoutX="211.0" layoutY="260.0" mnemonicParsing="false" onAction="#admin" prefHeight="25.0" prefWidth="179.0" text="Панель администратора" />
+   <Button fx:id="backButton" layoutX="211.0" layoutY="296.0" mnemonicParsing="false" onAction="#back" prefHeight="25.0" prefWidth="179.0" text="Выйти" />
 </AnchorPane>

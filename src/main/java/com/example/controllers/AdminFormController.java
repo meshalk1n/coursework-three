@@ -4,10 +4,15 @@ import com.example.models.User;
 import com.example.services.AuthenticatedUserService;
 import com.example.services.UserService;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,6 +51,9 @@ public class AdminFormController {
     public TableColumn lastModifiedByColumn;
 
     @FXML
+    public Button backButton;
+
+    @FXML
     private TextField usernameField;
 
     @FXML
@@ -58,10 +66,14 @@ public class AdminFormController {
 
     private AuthenticatedUserService authenticatedUserService;
 
+    private final FxWeaver fxWeaver;
+
     @Autowired
-    public AdminFormController(UserService userService, AuthenticatedUserService authenticatedUserService) {
+    public AdminFormController(UserService userService, AuthenticatedUserService authenticatedUserService,
+                               FxWeaver fxWeaver) {
         this.userService = userService;
         this.authenticatedUserService = authenticatedUserService;
+        this.fxWeaver = fxWeaver;
     }
     @FXML
     public void initialize() {
@@ -123,5 +135,18 @@ public class AdminFormController {
     private void updateTableView() {
         List<User> users = userService.getAllUsers();
         tableView.getItems().setAll(users);
+    }
+
+    @FXML
+    public void back() {
+        openMainForm();
+    }
+
+    private void openMainForm(){
+        Parent view = fxWeaver.loadView(MainFormController.class);
+        Scene scene = new Scene(view);
+        Stage stage = (Stage) backButton.getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
     }
 }

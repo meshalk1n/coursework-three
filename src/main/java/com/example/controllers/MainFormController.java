@@ -32,10 +32,17 @@ public class MainFormController {
     @FXML
     public Button reportsButton;
 
+    @FXML
+    public Button backButton;
+
+    private final LoginFormController loginFormController;
+
     @Autowired
-    public MainFormController(FxWeaver fxWeaver, AuthenticatedUserService authenticatedUserService){
+    public MainFormController(FxWeaver fxWeaver, AuthenticatedUserService authenticatedUserService,
+                              LoginFormController loginFormController){
         this.fxWeaver = fxWeaver;
         this.authenticatedUserService = authenticatedUserService;
+        this.loginFormController = loginFormController;
     }
 
     @FXML
@@ -95,6 +102,20 @@ public class MainFormController {
         Parent view = fxWeaver.loadView(ReportsFormController.class);
         Scene scene = new Scene(view);
         Stage stage = (Stage) reportsButton.getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    public void back() {
+        loginFormController.resetUserData();
+        openLoginForm();
+    }
+
+    private void openLoginForm(){
+        Parent view = fxWeaver.loadView(LoginFormController.class);
+        Scene scene = new Scene(view);
+        Stage stage = (Stage) backButton.getScene().getWindow();
         stage.setScene(scene);
         stage.show();
     }

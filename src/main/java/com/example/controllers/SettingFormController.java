@@ -22,6 +22,9 @@ public class SettingFormController {
 
     private final FxWeaver fxWeaver;
 
+    @FXML
+    public Button backButton;
+
     @Autowired
     public SettingFormController(LoginFormController loginFormController, FxWeaver fxWeaver){
         this.loginFormController = loginFormController;
@@ -52,5 +55,18 @@ public class SettingFormController {
             // Обработка ситуации, когда myProfileFormController не проинициализирован
             System.out.println("User or MyProfileFormController is null");
         }
+    }
+
+    @FXML
+    public void back() {
+        openMainForm();
+    }
+
+    private void openMainForm(){
+        Parent view = fxWeaver.loadView(MainFormController.class);
+        Scene scene = new Scene(view);
+        Stage stage = (Stage) backButton.getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
     }
 }

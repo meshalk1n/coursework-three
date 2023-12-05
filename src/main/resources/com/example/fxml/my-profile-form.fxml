@@ -33,5 +33,5 @@
 
     <Button text="Редактировать профиль" />
 
-    <Button text="Назад" />
+    <Button fx:id="backButton" onAction="#back" text="Назад" />
 </VBox>

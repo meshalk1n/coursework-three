@@ -91,4 +91,11 @@ public class LoginFormController {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void resetUserData() {
+        usernameField.clear();
+        passwordField.clear();
+        errorMessageLabel.setText("");
+        loggedInUser = null;
+    }
 }
