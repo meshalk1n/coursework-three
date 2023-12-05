@@ -29,6 +29,9 @@ public class MainFormController {
     @FXML
     public Button viewAssetsButton;
 
+    @FXML
+    public Button reportsButton;
+
     @Autowired
     public MainFormController(FxWeaver fxWeaver, AuthenticatedUserService authenticatedUserService){
         this.fxWeaver = fxWeaver;
@@ -79,6 +82,19 @@ public class MainFormController {
         Parent view = fxWeaver.loadView(AssetsFormController.class);
         Scene scene = new Scene(view);
         Stage stage = (Stage) viewAssetsButton.getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    public void reports() {
+        openReportsForm();
+    }
+
+    private void openReportsForm(){
+        Parent view = fxWeaver.loadView(ReportsFormController.class);
+        Scene scene = new Scene(view);
+        Stage stage = (Stage) reportsButton.getScene().getWindow();
         stage.setScene(scene);
         stage.show();
     }
