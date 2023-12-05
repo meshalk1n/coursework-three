@@ -57,6 +57,9 @@ public class AdminFormController {
     public Button clearButton;
 
     @FXML
+    public TextField searchField;
+
+    @FXML
     private TextField usernameField;
 
     @FXML
@@ -102,6 +105,14 @@ public class AdminFormController {
                 emailField.setText(newValue.getEmail());
             }
         });
+
+        // Добавление слушателя изменений текста в поле поиска
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            searchUser(newValue);
+        });
+
+        // Запуск начального поиска с пустым значением (отобразить все пользователи)
+        searchUser("");
     }
 
     @FXML
@@ -170,5 +181,22 @@ public class AdminFormController {
         passwordField.clear();
         roleField.clear();
         emailField.clear();
+    }
+
+    private void searchUser(String searchTerm) {
+        if (!searchTerm.isEmpty()) {
+            List<User> foundUsers = userService.getUsersByUsernameContains(searchTerm);
+
+            if (!foundUsers.isEmpty()) {
+                // Отображение найденных пользователей в таблице
+                tableView.getItems().setAll(foundUsers);
+            } else {
+                // Можете добавить обработку, если пользователь не найден
+                // Например, вы можете вывести сообщение об отсутствии результатов.
+            }
+        } else {
+            // Если поле поиска пустое, отобразите все пользователи
+            updateTableView();
+        }
     }
 }
