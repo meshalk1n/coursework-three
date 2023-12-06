@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.EstateFormController">
+    <Button fx:id="backButton" mnemonicParsing="false" onAction="#back" text="назад" />
+    <TextField fx:id="searchField" prefHeight="25.0" prefWidth="471.0" promptText="Search by name" />
+
+    <TableView fx:id="tableView" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="idColumn" text="ID" />
+            <TableColumn fx:id="nameColumn" text="Name" />
+            <TableColumn fx:id="categoryColumn" text="Category" />
+            <TableColumn fx:id="costColumn" text="Cost" />
+            <TableColumn fx:id="conditionColumn" text="Condition" />
+            <TableColumn fx:id="acquisitionDateColumn" text="Acquisition Date" />
+            <TableColumn fx:id="addedByUserColumn" text="Added By User" />
+        </columns>
+    </TableView>
+
+    <HBox>
+        <TextField fx:id="nameField" promptText="Name" />
+        <TextField fx:id="categoryField" promptText="Category" />
+        <TextField fx:id="costField" promptText="Cost" />
+        <TextField fx:id="conditionField" promptText="Condition" />
+        <Button  text="Save" />
+        <Button  text="Delete" />
+        <Button  text="Update" />
+        <Button fx:id="clearButton" mnemonicParsing="false"  prefHeight="25.0" prefWidth="51.0" text="Clear" />
+    </HBox>
+</VBox>

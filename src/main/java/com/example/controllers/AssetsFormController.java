@@ -19,6 +19,9 @@ public class AssetsFormController {
 
     private final FxWeaver fxWeaver;
 
+    @FXML
+    public Button estateButton;
+
     @Autowired
     public AssetsFormController(FxWeaver fxWeaver) {
         this.fxWeaver = fxWeaver;
@@ -33,6 +36,18 @@ public class AssetsFormController {
         Parent view = fxWeaver.loadView(MainFormController.class);
         Scene scene = new Scene(view);
         Stage stage = (Stage) backButton.getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void estate() {
+        openEstateForm();
+    }
+
+    private void openEstateForm(){
+        Parent view = fxWeaver.loadView(EstateFormController.class);
+        Scene scene = new Scene(view);
+        Stage stage = (Stage) estateButton.getScene().getWindow();
         stage.setScene(scene);
         stage.show();
     }
