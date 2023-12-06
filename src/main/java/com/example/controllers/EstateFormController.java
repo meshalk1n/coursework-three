@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxWeaver;
@@ -53,6 +54,18 @@ public class EstateFormController {
     public Button backButton;
 
     @FXML
+    public TextField nameField;
+
+    @FXML
+    public TextField categoryField;
+
+    @FXML
+    public TextField costField;
+
+    @FXML
+    public TextField conditionField;
+
+    @FXML
     private TableView<Estate> tableView;
 
     @Autowired
@@ -94,5 +107,26 @@ public class EstateFormController {
         Stage stage = (Stage) backButton.getScene().getWindow();
         stage.setScene(scene);
         stage.show();
+    }
+
+    @FXML
+    public void saveEstate() {
+        Estate newEstate = new Estate();
+        newEstate.setName(nameField.getText());
+        newEstate.setCategory(categoryField.getText());
+        newEstate.setCost(Integer.parseInt(costField.getText()));
+        newEstate.setCondition(conditionField.getText());
+        estateService.saveEstate(newEstate, authenticatedUserService.getActiveUser().getUsername());
+
+        // Обновление отображения таблицы
+        updateTableView();
+    }
+
+    @FXML
+    public void deleteEstate() {
+    }
+
+    @FXML
+    public void updateEstate() {
     }
 }

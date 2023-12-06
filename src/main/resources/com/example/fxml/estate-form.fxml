@@ -27,9 +27,9 @@
         <TextField fx:id="categoryField" promptText="Category" />
         <TextField fx:id="costField" promptText="Cost" />
         <TextField fx:id="conditionField" promptText="Condition" />
-        <Button  text="Save" />
-        <Button  text="Delete" />
-        <Button  text="Update" />
+        <Button onAction="#saveEstate" text="Save" />
+        <Button onAction="#deleteEstate" text="Delete" />
+        <Button onAction="#updateEstate" text="Update" />
         <Button fx:id="clearButton" mnemonicParsing="false"  prefHeight="25.0" prefWidth="51.0" text="Clear" />
     </HBox>
 </VBox>

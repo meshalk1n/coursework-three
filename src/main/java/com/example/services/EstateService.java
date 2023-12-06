@@ -22,8 +22,9 @@ public class EstateService {
         return estateRepository.findAll();
     }
 
-    public void saveEstate(Estate estate) {
+    public void saveEstate(Estate estate, String username) {
         estate.setAcquisitionDate(LocalDateTime.now());
+        estate.setAddedByUser(username);
         estateRepository.save(estate);
     }
 
@@ -31,7 +32,7 @@ public class EstateService {
         estateRepository.delete(estate);
     }
 
-    public void updateUser(Estate estate, String modifiedBy) {
+    public void updateEstate(Estate estate, String modifiedBy) {
         // Обновление пользователя, только если у пользователя уже есть id
         if (estate.getId() != 0) {
             estate.setAddedByUser(modifiedBy);
