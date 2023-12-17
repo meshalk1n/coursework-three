@@ -29,10 +29,10 @@
         <TextField fx:id="costField" promptText="Расходы" />
         <!-- ComboBox для выбора состояния -->
         <ComboBox fx:id="conditionComboBox" />
-        <Button onAction="#saveEstate" text="Добавить" />
-        <Button onAction="#deleteEstate" text="Удалить" />
-        <Button onAction="#updateEstate" text="Обновить" />
+        <Button fx:id="saveEstateButton" onAction="#saveEstate" text="Добавить" />
+        <Button fx:id="deleteEstateButton" onAction="#deleteEstate" text="Удалить" />
+        <Button fx:id="updateEstateButton" onAction="#updateEstate" text="Обновить" />
         <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clear"  prefHeight="25.0" prefWidth="51.0" text="Отчистить" />
-        <Button onAction="#inventoryCard" text="Инвентаризация" />
+        <Button fx:id="inventoryCardButton" onAction="#inventoryCard" text="Инвентаризация" />
     </HBox>
 </VBox>

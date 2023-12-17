@@ -2,6 +2,7 @@ package com.example.controllers;
 
 import com.example.models.Estate;
 import com.example.models.InventoryCard;
+import com.example.models.User;
 import com.example.services.AuthenticatedUserService;
 import com.example.services.EstateService;
 import com.example.services.InventoryCardService;
@@ -80,6 +81,18 @@ public class EstateFormController {
     public ComboBox<String> categoryComboBox;
 
     @FXML
+    public Button saveEstateButton;
+
+    @FXML
+    public Button deleteEstateButton;
+
+    @FXML
+    public Button updateEstateButton;
+
+    @FXML
+    public Button inventoryCardButton;
+
+    @FXML
     private TableView<Estate> tableView;
 
     @Autowired
@@ -103,6 +116,24 @@ public class EstateFormController {
         acquisitionDateColumn.setCellValueFactory(new PropertyValueFactory<>("acquisitionDate"));
         addedByUserColumn.setCellValueFactory(new PropertyValueFactory<>("addedByUser"));
         lastModifiedByColumn.setCellValueFactory(new PropertyValueFactory<>("lastModifiedBy"));
+
+        // Получение текущего пользователя
+        User currentUser = authenticatedUserService.getActiveUser();
+
+        // Проверка роли пользователя
+        if (!currentUser.getRole().equals("ROLE_ADMIN") && !currentUser.getRole().equals("ROLE_ASSET_MANAGER")) {
+            // Если пользователь не является администратором, скрыть элементы
+            nameField.setVisible(false);
+            categoryComboBox.setVisible(false);
+            costField.setVisible(false);
+            conditionComboBox.setVisible(false);
+            saveEstateButton.setVisible(false);
+            deleteEstateButton.setVisible(false);
+            updateEstateButton.setVisible(false);
+            clearButton.setVisible(false);
+        }if(!currentUser.getRole().equals("ROLE_ADMIN")&& !currentUser.getRole().equals("ROLE_INVENTORY_OFFICER")){
+            inventoryCardButton.setVisible(false);
+        }
 
         // Заполнение ComboBox значениями
         ObservableList<String> conditions = FXCollections.observableArrayList("Новый", "Б/У", "Сломан");
