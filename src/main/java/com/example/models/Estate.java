@@ -33,6 +33,10 @@ public class Estate {
 
     @Column(name = "last_modified_by")
     private String lastModifiedBy;
+
+    @OneToOne(mappedBy = "estate")
+    private InventoryCard inventoryCard;
+
     public Estate(){
 
     }
@@ -42,6 +46,14 @@ public class Estate {
         this.category = category;
         this.cost = cost;
         this.condition = condition;
+    }
+
+    public InventoryCard getInventoryCard() {
+        return inventoryCard;
+    }
+
+    public void setInventoryCard(InventoryCard inventoryCard) {
+        this.inventoryCard = inventoryCard;
     }
 
     public String getLastModifiedBy() {
@@ -114,18 +126,24 @@ public class Estate {
         if (o == null || getClass() != o.getClass()) return false;
         Estate estate = (Estate) o;
         return id == estate.id && cost == estate.cost && Objects.equals(name,
-                estate.name) && Objects.equals(category, estate.category) && Objects.equals(acquisitionDate,
-                estate.acquisitionDate) && Objects.equals(condition, estate.condition) && Objects.equals(addedByUser,
-                estate.addedByUser) && Objects.equals(lastModifiedBy, estate.lastModifiedBy);
+                estate.name) && Objects.equals(category,
+                estate.category) && Objects.equals(acquisitionDate,
+                estate.acquisitionDate) && Objects.equals(condition,
+                estate.condition) && Objects.equals(addedByUser,
+                estate.addedByUser) && Objects.equals(lastModifiedBy,
+                estate.lastModifiedBy) && Objects.equals(inventoryCard,
+                estate.inventoryCard);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, category, cost, acquisitionDate, condition, addedByUser, lastModifiedBy);
+        return Objects.hash(id, name, category, cost, acquisitionDate,
+                condition, addedByUser, lastModifiedBy, inventoryCard);
     }
 
     @Override
     public String toString() {
-        return id + name + category + cost + acquisitionDate + condition + addedByUser + lastModifiedBy;
+        return id + name + category + cost + acquisitionDate +
+                condition + addedByUser + lastModifiedBy + (inventoryCard != null ? inventoryCard.toString() : "");
     }
 }
