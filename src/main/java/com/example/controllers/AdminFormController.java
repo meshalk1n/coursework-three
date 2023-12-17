@@ -60,6 +60,9 @@ public class AdminFormController {
     public TextField searchField;
 
     @FXML
+    public TableColumn addedByUserColumn;
+
+    @FXML
     private TextField usernameField;
 
     @FXML
@@ -90,6 +93,7 @@ public class AdminFormController {
         roleColumn.setCellValueFactory(new PropertyValueFactory<>("role"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
         creationDateColumn.setCellValueFactory(new PropertyValueFactory<>("creationDate"));
+        addedByUserColumn.setCellValueFactory(new PropertyValueFactory<>("addedByUser"));
         lastModifiedByColumn.setCellValueFactory(new PropertyValueFactory<>("lastModifiedBy"));
 
         // Загрузка пользователей при инициализации
@@ -122,7 +126,7 @@ public class AdminFormController {
         newUser.setPassword(passwordField.getText());
         newUser.setRole(roleField.getText());
         newUser.setEmail(emailField.getText());
-        userService.saveUser(newUser);
+        userService.saveUser(newUser, authenticatedUserService.getActiveUser().getUsername());
         // Обновление отображения таблицы
         updateTableView();
     }

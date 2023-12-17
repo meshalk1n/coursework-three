@@ -79,19 +79,6 @@ public class LoginFormController {
         stage.show();
     }
 
-    @FXML
-    private void register() {
-        openRegisterForm();
-    }
-
-    private void openRegisterForm(){
-        Parent root = fxWeaver.loadView(RegisterFormController.class);
-        Scene scene = new Scene(root);
-        Stage stage = (Stage) usernameField.getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
-    }
-
     public void resetUserData() {
         usernameField.clear();
         passwordField.clear();

@@ -22,8 +22,9 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public void saveUser(User user) {
+    public void saveUser(User user, String username) {
         user.setCreationDate(LocalDateTime.now());
+        user.setAddedByUser(username);
         userRepository.save(user);
     }
 

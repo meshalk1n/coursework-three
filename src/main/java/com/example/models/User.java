@@ -31,6 +31,9 @@ public class User {
     @Column(name = "role")
     private String role;
 
+    @Column(name = "added_by_user")
+    private String addedByUser;
+
     public User(){
 
     }
@@ -40,6 +43,14 @@ public class User {
         this.password = password;
         this.email = email;
         this.role = role;
+    }
+
+    public String getAddedByUser() {
+        return addedByUser;
+    }
+
+    public void setAddedByUser(String addedByUser) {
+        this.addedByUser = addedByUser;
     }
 
     public String getRole() {
@@ -106,11 +117,11 @@ public class User {
         return id == user.id && Objects.equals(username, user.username) && Objects.equals(password,
                 user.password) && Objects.equals(email, user.email) && Objects.equals(creationDate,
                 user.creationDate) && Objects.equals(lastModifiedBy, user.lastModifiedBy) && Objects.equals(role,
-                user.role);
+                user.role) && Objects.equals(addedByUser, user.addedByUser);
     }
 
     @Override
     public String toString() {
-        return id + username + password + role + creationDate + lastModifiedBy;
+        return id + username + password + role + creationDate + lastModifiedBy + addedByUser;
     }
 }

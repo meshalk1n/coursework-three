@@ -19,12 +19,6 @@
         </padding>
     </Button>
 
-    <Button text="Register" onAction="#register">
-        <padding>
-            <Insets top="10" right="20" bottom="10" left="20" />
-        </padding>
-    </Button>
-
     <!-- Другие элементы управления и разметка -->
 
 </VBox>

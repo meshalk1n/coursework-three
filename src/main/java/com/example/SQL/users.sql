@@ -5,5 +5,6 @@ CREATE TABLE users (
     role VARCHAR(50),
     email VARCHAR(255),
     creation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    last_modified_by VARCHAR(50)
+    last_modified_by VARCHAR(50),
+    added_by_user VARCHAR(50)
 );
