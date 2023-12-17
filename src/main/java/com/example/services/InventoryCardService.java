@@ -1,5 +1,6 @@
 package com.example.services;
 
+import com.example.models.Estate;
 import com.example.models.InventoryCard;
 import com.example.repositories.InventoryCardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +46,9 @@ public class InventoryCardService {
 
     public List<InventoryCard> getEstateByStatusContains(String searchTerm){
         return inventoryCardRepository.findByStatusContains(searchTerm);
+    }
+
+    public boolean getExistsByInventoryCard(Estate estate){
+        return inventoryCardRepository.existsByEstate(estate);
     }
 }

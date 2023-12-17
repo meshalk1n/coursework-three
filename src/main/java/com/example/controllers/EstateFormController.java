@@ -241,7 +241,27 @@ public class EstateFormController {
 
     @FXML
     public void inventoryCard() {
-        transferData();
+        Estate selectedEstate = tableView.getSelectionModel().getSelectedItem();
+        if (selectedEstate != null) {
+            // Проверка, прошел ли объект уже инвентаризацию
+            if (inventoryCardService.getExistsByInventoryCard(selectedEstate)) {
+                // Если объект уже прошел инвентаризацию, показать сообщение
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Инвентаризация");
+                alert.setHeaderText(null);
+                alert.setContentText("Этот объект уже прошёл инвентаризацию");
+                alert.showAndWait();
+            } else {
+                // Если объект еще не прошел инвентаризацию, провести ее
+                transferData();
+                // Показать сообщение об успешной инвентаризации
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Инвентаризация");
+                alert.setHeaderText(null);
+                alert.setContentText("Инвентаризация прошла успешно");
+                alert.showAndWait();
+            }
+        }
     }
 
     private void transferData() {
