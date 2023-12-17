@@ -25,9 +25,10 @@
 
     <HBox>
         <TextField fx:id="nameField" promptText="Название" />
-        <TextField fx:id="categoryField" promptText="Категория" />
+        <ComboBox fx:id="categoryComboBox" />
         <TextField fx:id="costField" promptText="Расходы" />
-        <TextField fx:id="conditionField" promptText="Состояние" />
+        <!-- ComboBox для выбора состояния -->
+        <ComboBox fx:id="conditionComboBox" />
         <Button onAction="#saveEstate" text="Добавить" />
         <Button onAction="#deleteEstate" text="Удалить" />
         <Button onAction="#updateEstate" text="Обновить" />

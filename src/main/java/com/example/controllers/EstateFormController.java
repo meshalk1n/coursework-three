@@ -5,13 +5,12 @@ import com.example.models.InventoryCard;
 import com.example.services.AuthenticatedUserService;
 import com.example.services.EstateService;
 import com.example.services.InventoryCardService;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxWeaver;
@@ -62,13 +61,10 @@ public class EstateFormController {
     public TextField nameField;
 
     @FXML
-    public TextField categoryField;
-
-    @FXML
     public TextField costField;
 
     @FXML
-    public TextField conditionField;
+    public ComboBox<String> conditionComboBox;
 
     @FXML
     public TableColumn lastModifiedByColumn;
@@ -78,6 +74,9 @@ public class EstateFormController {
 
     @FXML
     public Button clearButton;
+
+    @FXML
+    public ComboBox<String> categoryComboBox;
 
     @FXML
     private TableView<Estate> tableView;
@@ -104,6 +103,33 @@ public class EstateFormController {
         addedByUserColumn.setCellValueFactory(new PropertyValueFactory<>("addedByUser"));
         lastModifiedByColumn.setCellValueFactory(new PropertyValueFactory<>("lastModifiedBy"));
 
+        // Заполнение ComboBox значениями
+        ObservableList<String> conditions = FXCollections.observableArrayList("Новый", "Б/У", "Сломан");
+        conditionComboBox.setItems(conditions);
+
+        // Установка слушателя для выбора значения в ComboBox
+        conditionComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                conditionComboBox.setValue(newValue);
+            }
+        });
+
+        // ---
+
+        // Заполнение ComboBox значениями
+        ObservableList<String> categories = FXCollections.observableArrayList("Офисное оборудование",
+                "Мебель", "Транспортные средства", "Производственное оборудование", "Недвижимость");
+        categoryComboBox.setItems(categories);
+
+        // Установка слушателя для выбора значения в ComboBox
+        categoryComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                categoryComboBox.setValue(newValue);
+            }
+        });
+
+
+
         // Загрузка пользователей при инициализации
         updateTableView();
 
@@ -112,9 +138,9 @@ public class EstateFormController {
             if (newValue != null) {
                 // Заполнение полей данными выбранного пользователя
                 nameField.setText(newValue.getName());
-                categoryField.setText(newValue.getCategory());
+                categoryComboBox.setValue(newValue.getCategory());
                 costField.setText(String.valueOf(newValue.getCost()));
-                conditionField.setText(newValue.getCondition());
+                conditionComboBox.setValue(newValue.getCondition());
             }
         });
 
@@ -149,9 +175,9 @@ public class EstateFormController {
     public void saveEstate() {
         Estate newEstate = new Estate();
         newEstate.setName(nameField.getText());
-        newEstate.setCategory(categoryField.getText());
+        newEstate.setCategory(categoryComboBox.getValue());
         newEstate.setCost(Integer.parseInt(costField.getText()));
-        newEstate.setCondition(conditionField.getText());
+        newEstate.setCondition(conditionComboBox.getValue());
         estateService.saveEstate(newEstate, authenticatedUserService.getActiveUser().getUsername());
 
         // Обновление отображения таблицы
@@ -171,9 +197,9 @@ public class EstateFormController {
     @FXML
     public void clear() {
         nameField.clear();
-        categoryField.clear();
+        categoryComboBox.setValue(null);
         costField.clear();
-        conditionField.clear();
+        conditionComboBox.setValue(null);
     }
 
     @FXML
@@ -182,9 +208,9 @@ public class EstateFormController {
         if (selectedEstate != null) {
             // Получение данных из полей ввода
             selectedEstate.setName(nameField.getText());
-            selectedEstate.setCategory(categoryField.getText());
+            selectedEstate.setCategory(categoryComboBox.getValue());
             selectedEstate.setCost(Integer.parseInt(costField.getText()));
-            selectedEstate.setCondition(conditionField.getText());
+            selectedEstate.setCondition(conditionComboBox.getValue());
 
             // Вызов метода updateUser в сервисе с указанием текущего пользователя
             estateService.updateEstate(selectedEstate, authenticatedUserService.getActiveUser().getUsername());;
