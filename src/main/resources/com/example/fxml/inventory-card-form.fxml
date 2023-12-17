@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.InventoryCardFormController">
+    <Button fx:id="backButton" mnemonicParsing="false" onAction="#back" text="назад" />
+    <TextField fx:id="searchField" prefHeight="25.0" prefWidth="471.0" promptText="Search by status" />
+
+    <TableView fx:id="tableView" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="idColumn" text="ID" />
+            <TableColumn fx:id="inventoryDateColumn" text="inventory date" />
+            <TableColumn fx:id="inventoryOfficerColumn" text="inventory officer" />
+            <TableColumn fx:id="notesColumn" text="notes" />
+            <TableColumn fx:id="locationColumn" text="location" />
+            <TableColumn fx:id="statusColumn" text="status" />
+        </columns>
+    </TableView>
+
+    <HBox>
+        <TextField fx:id="notesField" promptText="Notes" />
+        <TextField fx:id="locationField" promptText="Location" />
+        <TextField fx:id="statusField" promptText="Status" />
+        <Button fx:id="updateInventoryCordButton" onAction="#updateInventoryCord" text="Update" />
+        <Button  text="Delete" onAction="#deleteInventoryCord" />
+        <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clear"  prefHeight="25.0" prefWidth="51.0" text="Clear" />
+    </HBox>
+</VBox>

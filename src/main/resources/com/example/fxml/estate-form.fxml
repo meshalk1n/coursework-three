@@ -32,5 +32,6 @@
         <Button onAction="#deleteEstate" text="Delete" />
         <Button onAction="#updateEstate" text="Update" />
         <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clear"  prefHeight="25.0" prefWidth="51.0" text="Clear" />
+        <Button onAction="#inventoryCard" text="инвентаризация" />
     </HBox>
 </VBox>

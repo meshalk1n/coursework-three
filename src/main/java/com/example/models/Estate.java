@@ -131,14 +131,7 @@ public class Estate {
                 estate.acquisitionDate) && Objects.equals(condition,
                 estate.condition) && Objects.equals(addedByUser,
                 estate.addedByUser) && Objects.equals(lastModifiedBy,
-                estate.lastModifiedBy) && Objects.equals(inventoryCard,
-                estate.inventoryCard);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, category, cost, acquisitionDate,
-                condition, addedByUser, lastModifiedBy, inventoryCard);
+                estate.lastModifiedBy);
     }
 
     @Override

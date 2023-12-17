@@ -102,14 +102,13 @@ public class InventoryCard {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         InventoryCard that = (InventoryCard) o;
-        return id == that.id && Objects.equals(estate, that.estate) && Objects.equals(inventoryDate,
-                that.inventoryDate) && Objects.equals(inventoryOfficer, that.inventoryOfficer) && Objects.equals(notes,
-                that.notes) && Objects.equals(location, that.location) && Objects.equals(status, that.status);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, estate, inventoryDate, inventoryOfficer, notes, location, status);
+        return id == that.id && Objects.equals(estate,
+                that.estate) && Objects.equals(inventoryDate,
+                that.inventoryDate) && Objects.equals(inventoryOfficer,
+                that.inventoryOfficer) && Objects.equals(notes,
+                that.notes) && Objects.equals(location,
+                that.location) && Objects.equals(status,
+                that.status);
     }
 
     @Override

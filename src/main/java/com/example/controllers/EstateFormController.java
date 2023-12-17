@@ -1,9 +1,10 @@
 package com.example.controllers;
 
 import com.example.models.Estate;
-import com.example.models.User;
+import com.example.models.InventoryCard;
 import com.example.services.AuthenticatedUserService;
 import com.example.services.EstateService;
+import com.example.services.InventoryCardService;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,6 +19,7 @@ import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -29,6 +31,8 @@ public class EstateFormController {
     private final AuthenticatedUserService authenticatedUserService;
 
     private final FxWeaver fxWeaver;
+
+    private final InventoryCardService inventoryCardService;
 
     @FXML
     public TableColumn idColumn;
@@ -80,10 +84,12 @@ public class EstateFormController {
 
     @Autowired
     public EstateFormController(AuthenticatedUserService authenticatedUserService,
-                                FxWeaver fxWeaver, EstateService estateService) {
+                                FxWeaver fxWeaver, EstateService estateService,
+                                InventoryCardService inventoryCardService) {
         this.estateService = estateService;
         this.authenticatedUserService = authenticatedUserService;
         this.fxWeaver = fxWeaver;
+        this.inventoryCardService = inventoryCardService;
     }
 
     @FXML
@@ -205,5 +211,28 @@ public class EstateFormController {
             // Если поле поиска пустое, отобразите все пользователи
             updateTableView();
         }
+    }
+
+    @FXML
+    public void inventoryCard() {
+        transferData();
+    }
+
+    private void transferData() {
+        // Получение выбранного объекта Estate
+        Estate selectedEstate = tableView.getSelectionModel().getSelectedItem();
+
+        // Создание новой карточки инвентаря
+        InventoryCard newInventoryCard = new InventoryCard();
+
+        // Установка свойств новой карточки инвентаря
+        newInventoryCard.setEstate(selectedEstate);
+        newInventoryCard.setInventoryDate(LocalDateTime.now());
+
+        // Сохранение новой карточки инвентаря в базе данных
+        inventoryCardService.saveInventoryCard(newInventoryCard, authenticatedUserService.getActiveUser().getUsername());
+
+        // Обновление таблицы
+        updateTableView();
     }
 }
