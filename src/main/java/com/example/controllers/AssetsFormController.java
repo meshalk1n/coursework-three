@@ -22,6 +22,9 @@ public class AssetsFormController {
     @FXML
     public Button estateButton;
 
+    @FXML
+    public Button inventoryCardButton;
+
     @Autowired
     public AssetsFormController(FxWeaver fxWeaver) {
         this.fxWeaver = fxWeaver;
@@ -48,6 +51,19 @@ public class AssetsFormController {
         Parent view = fxWeaver.loadView(EstateFormController.class);
         Scene scene = new Scene(view);
         Stage stage = (Stage) estateButton.getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    public void inventoryCard() {
+        openInventoryCardForm();
+    }
+
+    private void openInventoryCardForm(){
+        Parent view = fxWeaver.loadView(InventoryCardFormController.class);
+        Scene scene = new Scene(view);
+        Stage stage = (Stage) inventoryCardButton.getScene().getWindow();
         stage.setScene(scene);
         stage.show();
     }
