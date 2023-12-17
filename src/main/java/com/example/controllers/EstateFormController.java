@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @FxmlView("/com/example/fxml/estate-form.fxml")
@@ -188,9 +189,20 @@ public class EstateFormController {
     public void deleteEstate() {
         Estate selectedEstate = tableView.getSelectionModel().getSelectedItem();
         if (selectedEstate != null) {
-            estateService.deleteEstate(selectedEstate);
-            // Обновление отображения таблицы
-            updateTableView();
+            // Создание нового диалогового окна с подтверждением
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Подтверждение удаления");
+            alert.setHeaderText(null);
+            alert.setContentText("Вы точно хотите удалить этот объект?");
+
+            // Отображение диалогового окна и ожидание решения пользователя
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                // Если пользователь подтвердил удаление, удалить объект
+                estateService.deleteEstate(selectedEstate);
+                // Обновление отображения таблицы
+                updateTableView();
+            }
         }
     }
 
