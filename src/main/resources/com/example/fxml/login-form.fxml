@@ -8,21 +8,21 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="171.0" prefWidth="309.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="com.example.controllers.LoginFormController">
+<VBox prefHeight="171.0" prefWidth="309.0" stylesheets="/com/example/css/login-form.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="com.example.controllers.LoginFormController">
     <TextField fx:id="usernameField" promptText="Введите имя пользователя" />
     <PasswordField fx:id="passwordField" promptText="Введите пароль " />
-    <Label fx:id="errorMessageLabel" textFill="red" />
-   <Pane prefHeight="200.0" prefWidth="200.0">
-      <children>
-      
-          <!-- Пример использования padding с Insets для Button -->
-          <Button layoutX="78.0" layoutY="22.0" onAction="#login" prefHeight="37.0" prefWidth="153.0" text="Авторизоваться">
-              <padding>
-                  <Insets bottom="10" left="20" right="20" top="10" />
-              </padding>
-          </Button>
-      </children>
-   </Pane>
+    <Label fx:id="errorMessageLabel" textFill="#ff6347"/>
+    <Pane prefHeight="200.0" prefWidth="200.0">
+        <children>
+
+            <!-- Пример использования padding с Insets для Button -->
+            <Button layoutX="78.0" layoutY="22.0" onAction="#login" prefHeight="37.0" prefWidth="153.0" text="Авторизоваться">
+                <padding>
+                    <Insets bottom="10" left="20" right="20" top="10" />
+                </padding>
+            </Button>
+        </children>
+    </Pane>
 
     <!-- Другие элементы управления и разметка -->
 

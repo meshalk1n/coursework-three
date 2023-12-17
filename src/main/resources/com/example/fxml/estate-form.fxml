@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.EstateFormController">
+<VBox stylesheets="/com/example/css/estate-form.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.EstateFormController">
     <Button fx:id="backButton" mnemonicParsing="false" onAction="#back" prefHeight="25.0" prefWidth="76.0" text="назад" />
     <TextField fx:id="searchField" prefHeight="25.0" prefWidth="471.0" promptText="Поиск по названию" />
 

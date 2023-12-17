@@ -8,13 +8,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="245.0" prefWidth="316.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.MyProfileFormController">
+<VBox prefHeight="245.0" prefWidth="316.0" stylesheets="/com/example/css/my-profile-form.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.MyProfileFormController">
     <padding>
         <Insets bottom="20" left="20" right="20" top="20" />
     </padding>
 
     <Label text="Мой профиль">
-    </Label>
+      <font>
+         <Font size="16.0" />
+      </font></Label>
 
     <HBox spacing="10">
         <Label text="Имя пользователя: " />
@@ -30,10 +32,10 @@
         <Label text="Электронная почта: " />
         <Label fx:id="emailLabel" />
     </HBox>
-   <Pane prefHeight="200.0" prefWidth="200.0">
-      <children>
-      
-          <Button fx:id="backButton" layoutY="50.0" onAction="#back" prefHeight="37.0" prefWidth="153.0" text="Назад" />
-      </children>
-   </Pane>
+    <Pane prefHeight="200.0" prefWidth="200.0">
+        <children>
+
+            <Button fx:id="backButton" layoutY="50.0" onAction="#back" prefHeight="37.0" prefWidth="153.0" text="Назад" />
+        </children>
+    </Pane>
 </VBox>
