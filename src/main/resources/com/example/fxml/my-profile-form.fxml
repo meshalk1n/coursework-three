@@ -16,17 +16,17 @@
     </Label>
 
     <HBox spacing="10">
-        <Label text="Имя пользователя:" />
+        <Label text="Имя пользователя: " />
         <Label fx:id="usernameLabel" />
     </HBox>
 
     <HBox spacing="10">
-        <Label text="Роль:" />
+        <Label text="Роль: " />
         <Label fx:id="roleLabel" />
     </HBox>
 
     <HBox spacing="10">
-        <Label text="Email:" />
+        <Label text="Электронная почта: " />
         <Label fx:id="emailLabel" />
     </HBox>
 

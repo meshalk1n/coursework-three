@@ -8,30 +8,30 @@
 
 <VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.EstateFormController">
     <Button fx:id="backButton" mnemonicParsing="false" onAction="#back" text="назад" />
-    <TextField fx:id="searchField" prefHeight="25.0" prefWidth="471.0" promptText="Search by name" />
+    <TextField fx:id="searchField" prefHeight="25.0" prefWidth="471.0" promptText="Поиск по названию" />
 
     <TableView fx:id="tableView" VBox.vgrow="ALWAYS">
         <columns>
             <TableColumn fx:id="idColumn" text="ID" />
-            <TableColumn fx:id="nameColumn" text="Name" />
-            <TableColumn fx:id="categoryColumn" text="Category" />
-            <TableColumn fx:id="costColumn" text="Cost" />
-            <TableColumn fx:id="conditionColumn" text="Condition" />
-            <TableColumn fx:id="acquisitionDateColumn" text="Acquisition Date" />
-            <TableColumn fx:id="addedByUserColumn" text="Added By User" />
-            <TableColumn fx:id="lastModifiedByColumn" text="Last Modified By" />
+            <TableColumn fx:id="nameColumn" text="Название" />
+            <TableColumn fx:id="categoryColumn" text="Категория" />
+            <TableColumn fx:id="costColumn" text="Расходы" />
+            <TableColumn fx:id="conditionColumn" text="Состояние" />
+            <TableColumn fx:id="acquisitionDateColumn" text="Дата Приобретения" />
+            <TableColumn fx:id="addedByUserColumn" text="Добавлено пользователем" />
+            <TableColumn fx:id="lastModifiedByColumn" text="Последнее изменение кем" />
         </columns>
     </TableView>
 
     <HBox>
-        <TextField fx:id="nameField" promptText="Name" />
-        <TextField fx:id="categoryField" promptText="Category" />
-        <TextField fx:id="costField" promptText="Cost" />
-        <TextField fx:id="conditionField" promptText="Condition" />
-        <Button onAction="#saveEstate" text="Save" />
-        <Button onAction="#deleteEstate" text="Delete" />
-        <Button onAction="#updateEstate" text="Update" />
-        <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clear"  prefHeight="25.0" prefWidth="51.0" text="Clear" />
-        <Button onAction="#inventoryCard" text="инвентаризация" />
+        <TextField fx:id="nameField" promptText="Название" />
+        <TextField fx:id="categoryField" promptText="Категория" />
+        <TextField fx:id="costField" promptText="Расходы" />
+        <TextField fx:id="conditionField" promptText="Состояние" />
+        <Button onAction="#saveEstate" text="Добавить" />
+        <Button onAction="#deleteEstate" text="Удалить" />
+        <Button onAction="#updateEstate" text="Обновить" />
+        <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clear"  prefHeight="25.0" prefWidth="51.0" text="Отчистить" />
+        <Button onAction="#inventoryCard" text="Инвентаризация" />
     </HBox>
 </VBox>

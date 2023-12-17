@@ -13,7 +13,7 @@
     <Label fx:id="errorMessageLabel" textFill="red" />
 
     <!-- Пример использования padding с Insets для Button -->
-    <Button text="Login" onAction="#login">
+    <Button text="Авторизоваться" onAction="#login">
         <padding>
             <Insets top="10" right="20" bottom="10" left="20" />
         </padding>

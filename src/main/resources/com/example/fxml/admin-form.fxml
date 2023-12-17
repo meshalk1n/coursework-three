@@ -9,29 +9,29 @@
 
 <VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.AdminFormController">
    <Button fx:id="backButton" mnemonicParsing="false" onAction="#back" text="назад" />
-   <TextField fx:id="searchField" prefHeight="25.0" prefWidth="471.0" promptText="Search by username" />
+   <TextField fx:id="searchField" prefHeight="25.0" prefWidth="471.0" promptText="Поиск по имени пользователя" />
 
     <TableView fx:id="tableView" VBox.vgrow="ALWAYS">
         <columns>
             <TableColumn fx:id="idColumn" text="ID" />
-            <TableColumn fx:id="usernameColumn" text="Username" />
-            <TableColumn fx:id="passwordColumn" text="Password" />
-            <TableColumn fx:id="roleColumn" text="Role" />
-            <TableColumn fx:id="emailColumn" text="Email" />
-            <TableColumn fx:id="creationDateColumn" text="Creation Date" />
-            <TableColumn fx:id="addedByUserColumn" text="Added By User" />
-            <TableColumn fx:id="lastModifiedByColumn" text="Last Modified By" />
+            <TableColumn fx:id="usernameColumn" text="Имя пользователя" />
+            <TableColumn fx:id="passwordColumn" text="Пароль" />
+            <TableColumn fx:id="roleColumn" text="Роль" />
+            <TableColumn fx:id="emailColumn" text="Электронная почта" />
+            <TableColumn fx:id="creationDateColumn" text="Дата создания" />
+            <TableColumn fx:id="addedByUserColumn" text="Добавлено пользователем" />
+            <TableColumn fx:id="lastModifiedByColumn" text="Последнее изменение кем" />
         </columns>
     </TableView>
 
     <HBox>
-        <TextField fx:id="usernameField" promptText="Username" />
-        <TextField fx:id="passwordField" promptText="Password" />
-        <TextField fx:id="roleField" promptText="Role" />
-        <TextField fx:id="emailField" promptText="Email" />
-        <Button onAction="#saveUser" text="Save" />
-        <Button onAction="#deleteUser" text="Delete" />
-        <Button onAction="#updateUser" text="Update" />
-      <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clear" prefHeight="25.0" prefWidth="51.0" text="Clear" />
+        <TextField fx:id="usernameField" promptText="Имя пользователя" />
+        <TextField fx:id="passwordField" promptText="Пароль" />
+        <TextField fx:id="roleField" promptText="Роль" />
+        <TextField fx:id="emailField" promptText="Электронная почта" />
+        <Button onAction="#saveUser" text="Добавить" />
+        <Button onAction="#deleteUser" text="Удалить" />
+        <Button onAction="#updateUser" text="Обновить" />
+      <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clear" prefHeight="25.0" prefWidth="51.0" text="Отчистить" />
     </HBox>
 </VBox>
