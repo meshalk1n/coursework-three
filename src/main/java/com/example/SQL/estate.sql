@@ -5,5 +5,6 @@ CREATE TABLE estate (
     cost int,
     condition VARCHAR(50),
     acquisition_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    last_modified_by VARCHAR(50),
     added_by_user VARCHAR(50)
 );

@@ -1,6 +1,7 @@
 package com.example.controllers;
 
 import com.example.models.Estate;
+import com.example.models.User;
 import com.example.services.AuthenticatedUserService;
 import com.example.services.EstateService;
 import javafx.fxml.FXML;
@@ -66,6 +67,9 @@ public class EstateFormController {
     public TextField conditionField;
 
     @FXML
+    public TableColumn lastModifiedByColumn;
+
+    @FXML
     private TableView<Estate> tableView;
 
     @Autowired
@@ -86,6 +90,7 @@ public class EstateFormController {
         conditionColumn.setCellValueFactory(new PropertyValueFactory<>("condition"));
         acquisitionDateColumn.setCellValueFactory(new PropertyValueFactory<>("acquisitionDate"));
         addedByUserColumn.setCellValueFactory(new PropertyValueFactory<>("addedByUser"));
+        lastModifiedByColumn.setCellValueFactory(new PropertyValueFactory<>("lastModifiedBy"));
 
         // Загрузка пользователей при инициализации
         updateTableView();
@@ -128,5 +133,21 @@ public class EstateFormController {
 
     @FXML
     public void updateEstate() {
+        Estate selectedEstate = tableView.getSelectionModel().getSelectedItem();
+        if (selectedEstate != null) {
+            // Получение данных из полей ввода
+            selectedEstate.setName(nameField.getText());
+            selectedEstate.setCategory(categoryField.getText());
+            selectedEstate.setCost(Integer.parseInt(costField.getText()));
+            selectedEstate.setCondition(conditionField.getText());
+
+            // Вызов метода updateUser в сервисе с указанием текущего пользователя
+            estateService.updateEstate(selectedEstate, authenticatedUserService.getActiveUser().getUsername());;
+
+            // Обновление отображения таблицы
+            updateTableView();
+        } else {
+            // Если ни один пользователь не выбран, можете вывести сообщение об ошибке или предпринять другие действия.
+        }
     }
 }

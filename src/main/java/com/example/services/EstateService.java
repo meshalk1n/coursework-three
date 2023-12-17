@@ -35,7 +35,7 @@ public class EstateService {
     public void updateEstate(Estate estate, String modifiedBy) {
         // Обновление пользователя, только если у пользователя уже есть id
         if (estate.getId() != 0) {
-            estate.setAddedByUser(modifiedBy);
+            estate.setLastModifiedBy(modifiedBy);
             estateRepository.save(estate);
         } else {
             // Можете добавить обработку, если пользователя с указанным id не существует.

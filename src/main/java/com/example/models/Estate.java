@@ -31,6 +31,8 @@ public class Estate {
     @Column(name = "added_by_user")
     private String addedByUser;
 
+    @Column(name = "last_modified_by")
+    private String lastModifiedBy;
     public Estate(){
 
     }
@@ -40,6 +42,14 @@ public class Estate {
         this.category = category;
         this.cost = cost;
         this.condition = condition;
+    }
+
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
     }
 
     public int getId() {
@@ -103,13 +113,19 @@ public class Estate {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Estate estate = (Estate) o;
-        return id == estate.id && cost == estate.cost && Objects.equals(name, estate.name) && Objects.equals(category,
-                estate.category) && Objects.equals(acquisitionDate, estate.acquisitionDate) && Objects.equals(condition,
-                estate.condition) && Objects.equals(addedByUser, estate.addedByUser);
+        return id == estate.id && cost == estate.cost && Objects.equals(name,
+                estate.name) && Objects.equals(category, estate.category) && Objects.equals(acquisitionDate,
+                estate.acquisitionDate) && Objects.equals(condition, estate.condition) && Objects.equals(addedByUser,
+                estate.addedByUser) && Objects.equals(lastModifiedBy, estate.lastModifiedBy);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, category, cost, acquisitionDate, condition, addedByUser, lastModifiedBy);
     }
 
     @Override
     public String toString() {
-        return id + name + category + cost + acquisitionDate + condition + addedByUser;
+        return id + name + category + cost + acquisitionDate + condition + addedByUser + lastModifiedBy;
     }
 }

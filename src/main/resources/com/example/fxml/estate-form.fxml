@@ -19,6 +19,7 @@
             <TableColumn fx:id="conditionColumn" text="Condition" />
             <TableColumn fx:id="acquisitionDateColumn" text="Acquisition Date" />
             <TableColumn fx:id="addedByUserColumn" text="Added By User" />
+            <TableColumn fx:id="lastModifiedByColumn" text="Last Modified By" />
         </columns>
     </TableView>
 
