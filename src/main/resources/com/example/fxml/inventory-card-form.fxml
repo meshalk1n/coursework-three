@@ -25,7 +25,7 @@
     <HBox>
         <TextField fx:id="notesField" promptText="Примечания" />
         <TextField fx:id="locationField" promptText="Расположение" />
-        <TextField fx:id="statusField" promptText="Статус" />
+        <ComboBox fx:id="statusComboBox" />
         <Button fx:id="updateInventoryCordButton" onAction="#updateInventoryCord" text="Редактировать" />
         <Button  text="Удалить" onAction="#deleteInventoryCord" />
         <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clear"  prefHeight="25.0" prefWidth="51.0" text="Отчистить" />

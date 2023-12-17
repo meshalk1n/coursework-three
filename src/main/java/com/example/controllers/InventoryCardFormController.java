@@ -4,14 +4,13 @@ import com.example.models.Estate;
 import com.example.models.InventoryCard;
 import com.example.services.AuthenticatedUserService;
 import com.example.services.InventoryCardService;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxWeaver;
@@ -36,6 +35,9 @@ public class InventoryCardFormController {
 
     @FXML
     public TableColumn estateColumn;
+
+    @FXML
+    public ComboBox<String> statusComboBox;
 
     @FXML
     private TableView<InventoryCard> tableView;
@@ -71,9 +73,6 @@ public class InventoryCardFormController {
     public TextField locationField;
 
     @FXML
-    public TextField statusField;
-
-    @FXML
     public Button clearButton;
 
     @Autowired
@@ -96,6 +95,18 @@ public class InventoryCardFormController {
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
         estateColumn.setCellValueFactory(new PropertyValueFactory<>("estate"));
 
+        // Заполнение ComboBox значениями
+        ObservableList<String> status = FXCollections.observableArrayList("В наличии", "На обслуживани",
+                "Списан");
+        statusComboBox.setItems(status);
+
+        // Установка слушателя для выбора значения в ComboBox
+        statusComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                statusComboBox.setValue(newValue);
+            }
+        });
+
         // Загрузка пользователей при инициализации
         updateTableView();
 
@@ -105,7 +116,7 @@ public class InventoryCardFormController {
                 // Заполнение полей данными выбранного пользователя
                 notesField.setText(newValue.getNotes());
                 locationField.setText(newValue.getLocation());
-                statusField.setText(newValue.getStatus());
+                statusComboBox.setValue(newValue.getStatus());
             }
         });
 
@@ -159,7 +170,7 @@ public class InventoryCardFormController {
             // Получение данных из полей ввода
             selectedInventoryCard.setNotes(notesField.getText());
             selectedInventoryCard.setLocation(locationField.getText());
-            selectedInventoryCard.setStatus(statusField.getText());
+            selectedInventoryCard.setStatus(statusComboBox.getValue());
 
             // Вызов метода updateUser в сервисе с указанием текущего пользователя
             inventoryCardService.updateInventoryCard(selectedInventoryCard,
@@ -186,6 +197,6 @@ public class InventoryCardFormController {
     public void clear() {
         notesField.clear();
         locationField.clear();
-        statusField.clear();
+        statusComboBox.setValue(null);
     }
 }
