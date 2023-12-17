@@ -113,7 +113,6 @@ public class InventoryCard {
 
     @Override
     public String toString() {
-        return String.valueOf(id) + (estate != null ? estate.toString() : "") +
-                inventoryDate + inventoryOfficer + notes + location + status;
+        return (estate != null ? estate.getName() : "null");
     }
 }

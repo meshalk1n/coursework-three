@@ -18,6 +18,7 @@
             <TableColumn fx:id="notesColumn" text="notes" />
             <TableColumn fx:id="locationColumn" text="location" />
             <TableColumn fx:id="statusColumn" text="status" />
+            <TableColumn fx:id="estateColumn" text="estate"/>
         </columns>
     </TableView>
 

@@ -136,7 +136,6 @@ public class Estate {
 
     @Override
     public String toString() {
-        return id + name + category + cost + acquisitionDate +
-                condition + addedByUser + lastModifiedBy + (inventoryCard != null ? inventoryCard.toString() : "");
+        return String.valueOf(id);
     }
 }

@@ -35,6 +35,9 @@ public class InventoryCardFormController {
     public TextField searchField;
 
     @FXML
+    public TableColumn estateColumn;
+
+    @FXML
     private TableView<InventoryCard> tableView;
 
     @FXML
@@ -91,6 +94,7 @@ public class InventoryCardFormController {
         notesColumn.setCellValueFactory(new PropertyValueFactory<>("notes"));
         locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+        estateColumn.setCellValueFactory(new PropertyValueFactory<>("estate"));
 
         // Загрузка пользователей при инициализации
         updateTableView();
