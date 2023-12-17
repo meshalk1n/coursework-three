@@ -129,6 +129,12 @@ public class EstateFormController {
 
     @FXML
     public void deleteEstate() {
+        Estate selectedEstate = tableView.getSelectionModel().getSelectedItem();
+        if (selectedEstate != null) {
+            estateService.deleteEstate(selectedEstate);
+            // Обновление отображения таблицы
+            updateTableView();
+        }
     }
 
     @FXML
