@@ -42,4 +42,8 @@ public class EstateService {
             // Например, вы можете вывести сообщение об ошибке.
         }
     }
+
+    public List<Estate> getEstateByNameContains(String searchTerm){
+        return estateRepository.findByNameContains(searchTerm);
+    }
 }

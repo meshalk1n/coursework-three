@@ -31,6 +31,6 @@
         <Button onAction="#saveEstate" text="Save" />
         <Button onAction="#deleteEstate" text="Delete" />
         <Button onAction="#updateEstate" text="Update" />
-        <Button fx:id="clearButton" mnemonicParsing="false"  prefHeight="25.0" prefWidth="51.0" text="Clear" />
+        <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clear"  prefHeight="25.0" prefWidth="51.0" text="Clear" />
     </HBox>
 </VBox>

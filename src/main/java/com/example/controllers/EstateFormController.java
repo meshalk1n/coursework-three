@@ -70,6 +70,12 @@ public class EstateFormController {
     public TableColumn lastModifiedByColumn;
 
     @FXML
+    public TextField searchField;
+
+    @FXML
+    public Button clearButton;
+
+    @FXML
     private TableView<Estate> tableView;
 
     @Autowired
@@ -94,6 +100,25 @@ public class EstateFormController {
 
         // Загрузка пользователей при инициализации
         updateTableView();
+
+        // Добавление слушателя для выбора строки в таблице
+        tableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                // Заполнение полей данными выбранного пользователя
+                nameField.setText(newValue.getName());
+                categoryField.setText(newValue.getCategory());
+                costField.setText(String.valueOf(newValue.getCost()));
+                conditionField.setText(newValue.getCondition());
+            }
+        });
+
+        // Добавление слушателя изменений текста в поле поиска
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            searchEstate(newValue);
+        });
+
+        // Запуск начального поиска с пустым значением (отобразить все пользователи)
+        searchEstate("");
     }
 
     private void updateTableView() {
@@ -138,6 +163,14 @@ public class EstateFormController {
     }
 
     @FXML
+    public void clear() {
+        nameField.clear();
+        categoryField.clear();
+        costField.clear();
+        conditionField.clear();
+    }
+
+    @FXML
     public void updateEstate() {
         Estate selectedEstate = tableView.getSelectionModel().getSelectedItem();
         if (selectedEstate != null) {
@@ -154,6 +187,23 @@ public class EstateFormController {
             updateTableView();
         } else {
             // Если ни один пользователь не выбран, можете вывести сообщение об ошибке или предпринять другие действия.
+        }
+    }
+
+    private void searchEstate(String searchTerm) {
+        if (!searchTerm.isEmpty()) {
+            List<Estate> foundEstate = estateService.getEstateByNameContains(searchTerm);
+
+            if (!foundEstate.isEmpty()) {
+                // Отображение найденных пользователей в таблице
+                tableView.getItems().setAll(foundEstate);
+            } else {
+                // Можете добавить обработку, если пользователь не найден
+                // Например, вы можете вывести сообщение об отсутствии результатов.
+            }
+        } else {
+            // Если поле поиска пустое, отобразите все пользователи
+            updateTableView();
         }
     }
 }
