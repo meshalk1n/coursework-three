@@ -2,6 +2,7 @@ package com.example.controllers;
 
 import com.example.models.Estate;
 import com.example.models.InventoryCard;
+import com.example.models.User;
 import com.example.services.AuthenticatedUserService;
 import com.example.services.InventoryCardService;
 import javafx.collections.FXCollections;
@@ -39,6 +40,9 @@ public class InventoryCardFormController {
 
     @FXML
     public ComboBox<String> statusComboBox;
+
+    @FXML
+    public Button deleteInventoryCordButton;
 
     @FXML
     private TableView<InventoryCard> tableView;
@@ -87,6 +91,7 @@ public class InventoryCardFormController {
     //проверка
     @FXML
     public void initialize() {
+
         // Связывание столбцов таблицы с полями объектов
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         inventoryDateColumn.setCellValueFactory(new PropertyValueFactory<>("inventoryDate"));
@@ -95,6 +100,19 @@ public class InventoryCardFormController {
         locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
         estateColumn.setCellValueFactory(new PropertyValueFactory<>("estate"));
+
+        User currentUser = authenticatedUserService.getActiveUser();
+
+        // Проверка роли пользователя
+        if (!currentUser.getRole().equals("ROLE_ADMIN") && !currentUser.getRole().equals("ROLE_INVENTORY_OFFICER")) {
+            // Если пользователь не является администратором, скрыть элементы
+            notesField.setVisible(false);
+            statusComboBox.setVisible(false);
+            locationField.setVisible(false);
+            updateInventoryCordButton.setVisible(false);
+            deleteInventoryCordButton.setVisible(false);
+            clearButton.setVisible(false);
+        }
 
         // Заполнение ComboBox значениями
         ObservableList<String> status = FXCollections.observableArrayList("В наличии", "На обслуживани",
@@ -128,6 +146,8 @@ public class InventoryCardFormController {
 
         // Запуск начального поиска с пустым значением (отобразить все пользователи)
         searchInventoryCord("");
+
+
     }
 
     private void updateTableView() {

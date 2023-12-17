@@ -27,7 +27,7 @@
         <TextField fx:id="locationField" promptText="Расположение" />
         <ComboBox fx:id="statusComboBox" />
         <Button fx:id="updateInventoryCordButton" onAction="#updateInventoryCord" text="Редактировать" />
-        <Button  text="Удалить" onAction="#deleteInventoryCord" />
+        <Button fx:id="deleteInventoryCordButton" text="Удалить" onAction="#deleteInventoryCord" />
         <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clear"  prefHeight="25.0" prefWidth="51.0" text="Отчистить" />
     </HBox>
 </VBox>
