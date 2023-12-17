@@ -1,33 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
 <VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.InventoryCardFormController">
     <Button fx:id="backButton" mnemonicParsing="false" onAction="#back" text="назад" />
     <TextField fx:id="searchField" prefHeight="25.0" prefWidth="471.0" promptText="Поиск по статусу" />
 
-    <TableView fx:id="tableView" VBox.vgrow="ALWAYS">
+    <TableView fx:id="tableView" prefHeight="400.0" prefWidth="885.0" VBox.vgrow="ALWAYS">
         <columns>
             <TableColumn fx:id="idColumn" text="ID" />
-            <TableColumn fx:id="inventoryDateColumn" text="Дата инвентаризации" />
-            <TableColumn fx:id="inventoryOfficerColumn" text="Инспектор по инвентаризации" />
-            <TableColumn fx:id="notesColumn" text="Примечания" />
-            <TableColumn fx:id="locationColumn" text="Расположение" />
-            <TableColumn fx:id="statusColumn" text="Статус" />
-            <TableColumn fx:id="estateColumn" text="ID имущества"/>
+            <TableColumn fx:id="inventoryDateColumn" prefWidth="145.0" text="Дата инвентаризации" />
+            <TableColumn fx:id="inventoryOfficerColumn" prefWidth="194.0" text="Инспектор по инвентаризации" />
+            <TableColumn fx:id="notesColumn" prefWidth="105.0" text="Примечания" />
+            <TableColumn fx:id="locationColumn" prefWidth="102.0" text="Расположение" />
+            <TableColumn fx:id="statusColumn" prefWidth="101.0" text="Статус" />
+            <TableColumn fx:id="estateColumn" prefWidth="157.0" text="ID имущества" />
         </columns>
     </TableView>
 
     <HBox>
         <TextField fx:id="notesField" promptText="Примечания" />
         <TextField fx:id="locationField" promptText="Расположение" />
-        <ComboBox fx:id="statusComboBox" />
-        <Button fx:id="updateInventoryCordButton" onAction="#updateInventoryCord" text="Редактировать" />
-        <Button fx:id="deleteInventoryCordButton" text="Удалить" onAction="#deleteInventoryCord" />
-        <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clear"  prefHeight="25.0" prefWidth="51.0" text="Отчистить" />
+        <ComboBox fx:id="statusComboBox" prefHeight="25.0" prefWidth="144.0" />
+        <Button fx:id="updateInventoryCordButton" onAction="#updateInventoryCord" prefHeight="25.0" prefWidth="178.0" text="Редактировать" />
+        <Button fx:id="deleteInventoryCordButton" onAction="#deleteInventoryCord" prefHeight="25.0" prefWidth="118.0" text="Удалить" />
+        <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clear" prefHeight="25.0" prefWidth="148.0" text="Отчистить" />
     </HBox>
 </VBox>
