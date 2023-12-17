@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.ComboBox?>
 <VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.AdminFormController">
    <Button fx:id="backButton" mnemonicParsing="false" onAction="#back" text="назад" />
    <TextField fx:id="searchField" prefHeight="25.0" prefWidth="471.0" promptText="Поиск по имени пользователя" />
@@ -27,7 +28,8 @@
     <HBox>
         <TextField fx:id="usernameField" promptText="Имя пользователя" />
         <TextField fx:id="passwordField" promptText="Пароль" />
-        <TextField fx:id="roleField" promptText="Роль" />
+        <!-- ComboBox для выбора состояния -->
+        <ComboBox fx:id="roleComboBox" />
         <TextField fx:id="emailField" promptText="Электронная почта" />
         <Button onAction="#saveUser" text="Добавить" />
         <Button onAction="#deleteUser" text="Удалить" />

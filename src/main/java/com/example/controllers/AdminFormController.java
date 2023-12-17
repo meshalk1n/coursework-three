@@ -1,9 +1,10 @@
 package com.example.controllers;
 
-import com.example.models.InventoryCard;
 import com.example.models.User;
 import com.example.services.AuthenticatedUserService;
 import com.example.services.UserService;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -41,9 +42,6 @@ public class AdminFormController {
     public TableColumn creationDateColumn;
 
     @FXML
-    public TextField roleField;
-
-    @FXML
     public TextField emailField;
 
     @FXML
@@ -60,6 +58,9 @@ public class AdminFormController {
 
     @FXML
     public TableColumn addedByUserColumn;
+
+    @FXML
+    public ComboBox<String> roleComboBox;
 
     @FXML
     private TextField usernameField;
@@ -104,8 +105,21 @@ public class AdminFormController {
                 // Заполнение полей данными выбранного пользователя
                 usernameField.setText(newValue.getUsername());
                 passwordField.setText(newValue.getPassword());
-                roleField.setText(newValue.getRole());
+                roleComboBox.setValue(newValue.getRole());
                 emailField.setText(newValue.getEmail());
+
+            }
+        });
+
+        // Заполнение ComboBox значениями
+        ObservableList<String> conditions = FXCollections.observableArrayList("ROLE_ADMIN","ROLE_ASSET_MANAGER" ,
+                "ROLE_INVENTORY_OFFICER", "ROLE_USER");
+        roleComboBox.setItems(conditions);
+
+        // Установка слушателя для выбора значения в ComboBox
+        roleComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                roleComboBox.setValue(newValue);
             }
         });
 
@@ -123,7 +137,7 @@ public class AdminFormController {
         User newUser = new User();
         newUser.setUsername(usernameField.getText());
         newUser.setPassword(passwordField.getText());
-        newUser.setRole(roleField.getText());
+        newUser.setRole(roleComboBox.getValue());
         newUser.setEmail(emailField.getText());
         userService.saveUser(newUser, authenticatedUserService.getActiveUser().getUsername());
         // Обновление отображения таблицы
@@ -158,7 +172,7 @@ public class AdminFormController {
             // Получение данных из полей ввода
             selectedUser.setUsername(usernameField.getText());
             selectedUser.setPassword(passwordField.getText());
-            selectedUser.setRole(roleField.getText());
+            selectedUser.setRole(roleComboBox.getValue());
             selectedUser.setEmail(emailField.getText());
 
             // Вызов метода updateUser в сервисе с указанием текущего пользователя
@@ -193,7 +207,7 @@ public class AdminFormController {
     public void clear() {
         usernameField.clear();
         passwordField.clear();
-        roleField.clear();
+        roleComboBox.setValue(null);
         emailField.clear();
     }
 
