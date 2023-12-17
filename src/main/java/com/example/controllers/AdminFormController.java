@@ -1,15 +1,13 @@
 package com.example.controllers;
 
+import com.example.models.InventoryCard;
 import com.example.models.User;
 import com.example.services.AuthenticatedUserService;
 import com.example.services.UserService;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxWeaver;
@@ -18,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @FxmlView("/com/example/fxml/admin-form.fxml")
@@ -135,9 +134,20 @@ public class AdminFormController {
     public void deleteUser() {
         User selectedUser = tableView.getSelectionModel().getSelectedItem();
         if (selectedUser != null) {
-            userService.deleteUser(selectedUser);
-            // Обновление отображения таблицы
-            updateTableView();
+            // Создание нового диалогового окна с подтверждением
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Подтверждение удаления");
+            alert.setHeaderText(null);
+            alert.setContentText("Вы точно хотите удалить этот объект?");
+
+            // Отображение диалогового окна и ожидание решения пользователя
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                // Если пользователь подтвердил удаление, удалить объект
+                userService.deleteUser(selectedUser);
+                // Обновление отображения таблицы
+                updateTableView();
+            }
         }
     }
 
