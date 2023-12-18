@@ -1,6 +1,7 @@
 package com.example.controllers;
 
 import com.example.models.User;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -24,6 +25,9 @@ public class SettingFormController {
 
     @FXML
     public Button backButton;
+
+    @FXML
+    public Button aboutTheProgramButton;
 
     @Autowired
     public SettingFormController(LoginFormController loginFormController, FxWeaver fxWeaver){
@@ -66,6 +70,19 @@ public class SettingFormController {
         Parent view = fxWeaver.loadView(MainFormController.class);
         Scene scene = new Scene(view);
         Stage stage = (Stage) backButton.getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    public void aboutTheProgram() {
+        openAboutTheProgramForm();
+    }
+
+    private void openAboutTheProgramForm(){
+        Parent view = fxWeaver.loadView(AboutTheProgramFormController.class);
+        Scene scene = new Scene(view);
+        Stage stage = (Stage) aboutTheProgramButton.getScene().getWindow();
         stage.setScene(scene);
         stage.show();
     }
