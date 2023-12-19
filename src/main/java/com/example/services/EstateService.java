@@ -46,4 +46,16 @@ public class EstateService {
     public List<Estate> getEstateByNameContains(String searchTerm){
         return estateRepository.findByNameContains(searchTerm);
     }
+
+    public List<Estate> getEstateByCategoryContains(String searchTerm){
+        return estateRepository.findByCategoryContains(searchTerm);
+    }
+
+    public List<Estate> getEstateByCost(Integer searchTerm){
+        return estateRepository.findByCost(searchTerm);
+    }
+
+    public List<Estate> getEstateByConditionContains(String searchTerm){
+        return estateRepository.findByConditionContains(searchTerm);
+    }
 }

@@ -64,6 +64,15 @@ public class ListEstateFormController {
     public Button reportButton;
 
     @FXML
+    public TextField searchCategoryField;
+
+    @FXML
+    public TextField searchCostField;
+
+    @FXML
+    public TextField searchConditionField;
+
+    @FXML
     private TableView<Estate> tableView;
 
     @Autowired
@@ -95,6 +104,39 @@ public class ListEstateFormController {
 
         // Запуск начального поиска с пустым значением (отобразить все пользователи)
         searchEstate("");
+
+        //--
+
+        // Добавление слушателя изменений текста в поле поиска
+        searchCategoryField.textProperty().addListener((observable, oldValue, newValue) -> {
+            searchEstateCategory(newValue);
+        });
+
+        // Запуск начального поиска с пустым значением (отобразить все пользователи)
+        searchEstateCategory("");
+
+        //--
+
+        // Добавление слушателя изменений текста в поле поиска
+        searchCostField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.isEmpty()) {
+                searchEstateCost(Integer.valueOf(newValue));
+            } else {
+                // Если поле поиска пустое, отобразите все пользователи
+                updateTableView();
+            }
+        });
+
+
+        //--
+
+        // Добавление слушателя изменений текста в поле поиска
+        searchConditionField.textProperty().addListener((observable, oldValue, newValue) -> {
+            searchEstateCondition(newValue);
+        });
+
+        // Запуск начального поиска с пустым значением (отобразить все пользователи)
+        searchEstateCondition("");
     }
 
     private void updateTableView() {
@@ -118,6 +160,57 @@ public class ListEstateFormController {
     private void searchEstate(String searchTerm) {
         if (!searchTerm.isEmpty()) {
             List<Estate> foundEstate = estateService.getEstateByNameContains(searchTerm);
+
+            if (!foundEstate.isEmpty()) {
+                // Отображение найденных пользователей в таблице
+                tableView.getItems().setAll(foundEstate);
+            } else {
+                // Можете добавить обработку, если пользователь не найден
+                // Например, вы можете вывести сообщение об отсутствии результатов.
+            }
+        } else {
+            // Если поле поиска пустое, отобразите все пользователи
+            updateTableView();
+        }
+    }
+
+    private void searchEstateCategory(String searchTerm) {
+        if (!searchTerm.isEmpty()) {
+            List<Estate> foundEstate = estateService.getEstateByCategoryContains(searchTerm);
+
+            if (!foundEstate.isEmpty()) {
+                // Отображение найденных пользователей в таблице
+                tableView.getItems().setAll(foundEstate);
+            } else {
+                // Можете добавить обработку, если пользователь не найден
+                // Например, вы можете вывести сообщение об отсутствии результатов.
+            }
+        } else {
+            // Если поле поиска пустое, отобразите все пользователи
+            updateTableView();
+        }
+    }
+
+    private void searchEstateCost(Integer searchTerm) {
+        if (searchTerm != null && searchTerm != 0) {
+            List<Estate> foundEstate = estateService.getEstateByCost(searchTerm);
+
+            if (!foundEstate.isEmpty()) {
+                // Отображение найденных пользователей в таблице
+                tableView.getItems().setAll(foundEstate);
+            } else {
+                // Можете добавить обработку, если пользователь не найден
+                // Например, вы можете вывести сообщение об отсутствии результатов.
+            }
+        } else {
+            // Если поле поиска пустое, отобразите все пользователи
+            updateTableView();
+        }
+    }
+
+    private void searchEstateCondition(String searchTerm) {
+        if (!searchTerm.isEmpty()) {
+            List<Estate> foundEstate = estateService.getEstateByConditionContains(searchTerm);
 
             if (!foundEstate.isEmpty()) {
                 // Отображение найденных пользователей в таблице
@@ -204,5 +297,4 @@ public class ListEstateFormController {
             e.printStackTrace();
         }
     }
-
 }

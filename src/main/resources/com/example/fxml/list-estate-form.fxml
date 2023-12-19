@@ -10,6 +10,9 @@
 <VBox stylesheets="/com/example/css/estate-form.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.ListEstateFormController">
     <Button fx:id="backButton" mnemonicParsing="false" onAction="#back" prefHeight="25.0" prefWidth="76.0" text="назад" />
     <TextField fx:id="searchField" prefHeight="25.0" prefWidth="471.0" promptText="Поиск по названию" />
+    <TextField fx:id="searchCategoryField" prefHeight="25.0" prefWidth="471.0" promptText="Поиск по категориям" />
+    <TextField fx:id="searchCostField" prefHeight="25.0" prefWidth="471.0" promptText="Поиск по расходам" />
+    <TextField fx:id="searchConditionField" prefHeight="25.0" prefWidth="471.0" promptText="Поиск по состоянию" />
 
     <TableView fx:id="tableView" prefHeight="400.0" prefWidth="885.0" VBox.vgrow="ALWAYS">
         <columns>
