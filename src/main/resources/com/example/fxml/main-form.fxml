@@ -6,6 +6,7 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="/com/example/css/main-form.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.MainFormController">
    <Button fx:id="viewAssetsButton" layoutX="195.0" layoutY="145.0" mnemonicParsing="false" onAction="#viewAssets" prefHeight="37.0" prefWidth="211.0" text="Просмотреть активы" />
    <Button fx:id="settingButton" layoutX="195.0" layoutY="182.0" mnemonicParsing="false" onAction="#setting" prefHeight="37.0" prefWidth="211.0" text="Настройки" />
-   <Button fx:id="adminFormButton" layoutX="195.0" layoutY="219.0" mnemonicParsing="false" onAction="#admin" prefHeight="37.0" prefWidth="211.0" text="Панель администратора" />
+   <Button fx:id="adminFormButton" layoutX="195.0" layoutY="256.0" mnemonicParsing="false" onAction="#admin" prefHeight="37.0" prefWidth="211.0" text="Панель администратора" />
    <Button fx:id="backButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#back" prefHeight="37.0" prefWidth="211.0" text="Выйти" />
+   <Button fx:id="reportsButton" layoutX="195.0" layoutY="219.0" mnemonicParsing="false" onAction="#reports" prefHeight="37.0" prefWidth="211.0" text="Отчёты" />
 </AnchorPane>
