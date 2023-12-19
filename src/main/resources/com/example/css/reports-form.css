@@ -1,0 +1,13 @@
+.root {
+    -fx-background-color: #2f2f2f;
+}
+
+.button {
+    -fx-background-color: #ff6347;
+    -fx-text-fill: white;
+    -fx-font-weight: bold; /* Добавьте эту строку */
+}
+
+.button:hover {
+    -fx-background-color: #ff4500;
+}
