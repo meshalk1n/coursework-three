@@ -25,6 +25,6 @@
     </TableView>
 
     <HBox>
-        <Button fx:id=""  text="Сделать отчёт" />
+        <Button fx:id="reportButton" onAction="#report" text="Сделать отчёт" />
     </HBox>
 </VBox>

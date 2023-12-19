@@ -1,10 +1,8 @@
 package com.example.controllers;
 
 import com.example.models.Estate;
-import com.example.models.User;
-import com.example.services.AuthenticatedUserService;
 import com.example.services.EstateService;
-import com.example.services.InventoryCardService;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,9 +11,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFTable;
+import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -24,11 +27,7 @@ public class ListEstateFormController {
 
     private final EstateService estateService;
 
-    private final AuthenticatedUserService authenticatedUserService;
-
     private final FxWeaver fxWeaver;
-
-    private final InventoryCardService inventoryCardService;
 
     @FXML
     public TableColumn idColumn;
@@ -55,49 +54,21 @@ public class ListEstateFormController {
     public Button backButton;
 
     @FXML
-    public TextField nameField;
-
-    @FXML
-    public TextField costField;
-
-    @FXML
-    public ComboBox<String> conditionComboBox;
-
-    @FXML
     public TableColumn lastModifiedByColumn;
 
     @FXML
     public TextField searchField;
 
     @FXML
-    public Button clearButton;
-
-    @FXML
-    public ComboBox<String> categoryComboBox;
-
-    @FXML
-    public Button saveEstateButton;
-
-    @FXML
-    public Button deleteEstateButton;
-
-    @FXML
-    public Button updateEstateButton;
-
-    @FXML
-    public Button inventoryCardButton;
+    public Button reportButton;
 
     @FXML
     private TableView<Estate> tableView;
 
     @Autowired
-    public ListEstateFormController(AuthenticatedUserService authenticatedUserService,
-                                FxWeaver fxWeaver, EstateService estateService,
-                                InventoryCardService inventoryCardService) {
+    public ListEstateFormController(FxWeaver fxWeaver, EstateService estateService) {
         this.estateService = estateService;
-        this.authenticatedUserService = authenticatedUserService;
         this.fxWeaver = fxWeaver;
-        this.inventoryCardService = inventoryCardService;
     }
 
     @FXML
@@ -112,38 +83,9 @@ public class ListEstateFormController {
         addedByUserColumn.setCellValueFactory(new PropertyValueFactory<>("addedByUser"));
         lastModifiedByColumn.setCellValueFactory(new PropertyValueFactory<>("lastModifiedBy"));
 
-        // Получение текущего пользователя
-        User currentUser = authenticatedUserService.getActiveUser();
-
-        // Проверка роли пользователя
-        if ((!currentUser.getRole().equals("ROLE_ADMIN")) && (!currentUser.getRole().equals("ROLE_ASSET_MANAGER"))) {
-            // Если пользователь не является администратором, скрыть элементы
-            nameField.setVisible(false);
-            categoryComboBox.setVisible(false);
-            costField.setVisible(false);
-            conditionComboBox.setVisible(false);
-            saveEstateButton.setVisible(false);
-            deleteEstateButton.setVisible(false);
-            updateEstateButton.setVisible(false);
-            clearButton.setVisible(false);
-        }if((!currentUser.getRole().equals("ROLE_ADMIN")) && (!currentUser.getRole().equals("ROLE_INVENTORY_OFFICER"))){
-            inventoryCardButton.setVisible(false);
-        }
-
 
         // Загрузка пользователей при инициализации
         updateTableView();
-
-        // Добавление слушателя для выбора строки в таблице
-        tableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                // Заполнение полей данными выбранного пользователя
-                nameField.setText(newValue.getName());
-                categoryComboBox.setValue(newValue.getCategory());
-                costField.setText(String.valueOf(newValue.getCost()));
-                conditionComboBox.setValue(newValue.getCondition());
-            }
-        });
 
         // Добавление слушателя изменений текста в поле поиска
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -188,4 +130,63 @@ public class ListEstateFormController {
             updateTableView();
         }
     }
+
+    @FXML
+    public void report() {
+        XWPFDocument document = new XWPFDocument();
+
+        // Создание новой таблицы в документе Word
+        XWPFTable table = document.createTable();
+
+        // Удаление первой пустой строки, созданной по умолчанию
+        table.removeRow(0);
+
+        // Получение данных из таблицы
+        ObservableList<Estate> estates = tableView.getItems();
+
+        // Заполнение таблицы данными
+        for (Estate estate : estates) {
+            XWPFTableRow row = table.createRow();
+            int numColumns = tableView.getColumns().size(); // Получаем количество столбцов
+            for (int i = 0; i < numColumns; i++) {
+                if (i >= row.getTableCells().size()) { // Создаем ячейку только если ее еще нет
+                    row.addNewTableCell();
+                }
+                // Заполнение ячейки данными в зависимости от индекса i
+                switch (i) {
+                    case 0:
+                        row.getCell(i).setText(String.valueOf(estate.getId()));
+                        break;
+                    case 1:
+                        row.getCell(i).setText(estate.getName());
+                        break;
+                    case 2:
+                        row.getCell(i).setText(estate.getCategory());
+                        break;
+                    case 3:
+                        row.getCell(i).setText(String.valueOf(estate.getCost()));
+                        break;
+                    case 4:
+                        row.getCell(i).setText(estate.getCondition());
+                        break;
+                    case 5:
+                        row.getCell(i).setText(String.valueOf(estate.getAcquisitionDate()));
+                        break;
+                    case 6:
+                        row.getCell(i).setText(estate.getAddedByUser());
+                        break;
+                    case 7:
+                        row.getCell(i).setText(estate.getLastModifiedBy());
+                    // Добавьте остальные поля по аналогии
+                }
+            }
+        }
+        // Сохранение документа Word
+        try (FileOutputStream out = new FileOutputStream("report.docx")) {
+            document.write(out);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
