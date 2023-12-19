@@ -104,7 +104,7 @@ public class InventoryCardFormController {
         User currentUser = authenticatedUserService.getActiveUser();
 
         // Проверка роли пользователя
-        if (!currentUser.getRole().equals("ROLE_ADMIN") && !currentUser.getRole().equals("ROLE_INVENTORY_OFFICER")) {
+        if ((!currentUser.getRole().equals("ROLE_ADMIN")) && (!currentUser.getRole().equals("ROLE_INVENTORY_OFFICER"))) {
             // Если пользователь не является администратором, скрыть элементы
             notesField.setVisible(false);
             statusComboBox.setVisible(false);

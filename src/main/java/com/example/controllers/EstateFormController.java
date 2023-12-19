@@ -121,7 +121,7 @@ public class EstateFormController {
         User currentUser = authenticatedUserService.getActiveUser();
 
         // Проверка роли пользователя
-        if (!currentUser.getRole().equals("ROLE_ADMIN") && !currentUser.getRole().equals("ROLE_ASSET_MANAGER")) {
+        if ((!currentUser.getRole().equals("ROLE_ADMIN")) && (!currentUser.getRole().equals("ROLE_ASSET_MANAGER"))) {
             // Если пользователь не является администратором, скрыть элементы
             nameField.setVisible(false);
             categoryComboBox.setVisible(false);
@@ -131,7 +131,7 @@ public class EstateFormController {
             deleteEstateButton.setVisible(false);
             updateEstateButton.setVisible(false);
             clearButton.setVisible(false);
-        }if(!currentUser.getRole().equals("ROLE_ADMIN")&& !currentUser.getRole().equals("ROLE_INVENTORY_OFFICER")){
+        }if((!currentUser.getRole().equals("ROLE_ADMIN")) && (!currentUser.getRole().equals("ROLE_INVENTORY_OFFICER"))){
             inventoryCardButton.setVisible(false);
         }
 
