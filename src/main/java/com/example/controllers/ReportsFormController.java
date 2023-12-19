@@ -19,6 +19,9 @@ public class ReportsFormController {
 
     private final FxWeaver fxWeaver;
 
+    @FXML
+    public Button listEstateButton;
+
     @Autowired
     public ReportsFormController(FxWeaver fxWeaver) {
         this.fxWeaver = fxWeaver;
@@ -33,6 +36,19 @@ public class ReportsFormController {
         Parent view = fxWeaver.loadView(MainFormController.class);
         Scene scene = new Scene(view);
         Stage stage = (Stage) backButton.getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    public void listEstate() {
+        openListEstateForm();
+    }
+
+    private void openListEstateForm(){
+        Parent view = fxWeaver.loadView(ListEstateFormController.class);
+        Scene scene = new Scene(view);
+        Stage stage = (Stage) listEstateButton.getScene().getWindow();
         stage.setScene(scene);
         stage.show();
     }
