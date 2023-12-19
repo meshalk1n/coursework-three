@@ -190,8 +190,16 @@ public class ListEstateFormController {
             }
         }
         // Сохранение документа Word
-        try (FileOutputStream out = new FileOutputStream("report.docx")) {
+        try (FileOutputStream out = new FileOutputStream("Отчет по списку имущества.docx")) {
             document.write(out);
+
+            // Показываем всплывающее окно с сообщением об успешном создании отчета
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Отчет");
+            alert.setHeaderText(null);
+            alert.setContentText("Отчет был успешно сделан!");
+
+            alert.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
         }
