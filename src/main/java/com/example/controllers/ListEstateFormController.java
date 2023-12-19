@@ -13,6 +13,7 @@ import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFTable;
+import org.apache.poi.xwpf.usermodel.XWPFTableCell;
 import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -140,6 +141,13 @@ public class ListEstateFormController {
 
         // Удаление первой пустой строки, созданной по умолчанию
         table.removeRow(0);
+
+        // Добавление заголовков столбцов
+        XWPFTableRow headerRow = table.createRow();
+        for (TableColumn column : tableView.getColumns()) {
+            XWPFTableCell cell = headerRow.addNewTableCell();
+            cell.setText(column.getText());
+        }
 
         // Получение данных из таблицы
         ObservableList<Estate> estates = tableView.getItems();
