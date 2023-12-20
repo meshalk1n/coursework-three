@@ -146,11 +146,11 @@ public class ListEstateFormController {
 
     @FXML
     public void back(){
-        openAssetsFor();
+        openReportForm();
     }
 
-    private void openAssetsFor(){
-        Parent view = fxWeaver.loadView(AssetsFormController.class);
+    private void openReportForm(){
+        Parent view = fxWeaver.loadView(ReportsFormController.class);
         Scene scene = new Scene(view);
         Stage stage = (Stage) backButton.getScene().getWindow();
         stage.setScene(scene);
