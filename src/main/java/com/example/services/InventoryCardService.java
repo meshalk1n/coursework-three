@@ -2,6 +2,7 @@ package com.example.services;
 
 import com.example.models.Estate;
 import com.example.models.InventoryCard;
+import com.example.models.User;
 import com.example.repositories.InventoryCardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,5 +51,9 @@ public class InventoryCardService {
 
     public boolean getExistsByInventoryCard(Estate estate){
         return inventoryCardRepository.existsByEstate(estate);
+    }
+
+    public List<InventoryCard> getEstateByLocationContains(String searchTerm){
+        return inventoryCardRepository.findByLocationContains(searchTerm);
     }
 }

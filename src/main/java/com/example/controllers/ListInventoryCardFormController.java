@@ -1,7 +1,11 @@
 package com.example.controllers;
 
+import com.example.models.Estate;
 import com.example.models.InventoryCard;
+import com.example.models.User;
+import com.example.services.EstateService;
 import com.example.services.InventoryCardService;
+import com.example.services.UserService;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -30,6 +34,10 @@ public class ListInventoryCardFormController {
 
     private final InventoryCardService inventoryCardService;
 
+    private final UserService userService;
+
+    private final EstateService estateService;
+
 
     @FXML
     public TextField searchField;
@@ -39,6 +47,12 @@ public class ListInventoryCardFormController {
 
     @FXML
     public Button reportButton;
+
+    @FXML
+    public TextField searchLocationField;
+
+    @FXML
+    public TextField searchInventoryOfficerField;
 
     @FXML
     private TableView<InventoryCard> tableView;
@@ -65,9 +79,11 @@ public class ListInventoryCardFormController {
     public TableColumn statusColumn;
 
     @Autowired
-    public ListInventoryCardFormController(FxWeaver fxWeaver, InventoryCardService inventoryCardService) {
+    public ListInventoryCardFormController(FxWeaver fxWeaver, InventoryCardService inventoryCardService, UserService userService, EstateService estateService) {
         this.fxWeaver = fxWeaver;
         this.inventoryCardService = inventoryCardService;
+        this.userService = userService;
+        this.estateService = estateService;
     }
 
     //проверка
@@ -95,7 +111,15 @@ public class ListInventoryCardFormController {
         // Запуск начального поиска с пустым значением (отобразить все пользователи)
         searchInventoryCord("");
 
+        //--
 
+        // Добавление слушателя изменений текста в поле поиска
+        searchLocationField.textProperty().addListener((observable, oldValue, newValue) -> {
+            searchInventoryCordLocation(newValue);
+        });
+
+        // Запуск начального поиска с пустым значением (отобразить все пользователи)
+        searchInventoryCordLocation("");
     }
 
     private void updateTableView() {
@@ -119,6 +143,23 @@ public class ListInventoryCardFormController {
     private void searchInventoryCord(String searchTerm) {
         if (!searchTerm.isEmpty()) {
             List<InventoryCard> foundInventoryCord = inventoryCardService.getEstateByStatusContains(searchTerm);
+
+            if (!foundInventoryCord.isEmpty()) {
+                // Отображение найденных пользователей в таблице
+                tableView.getItems().setAll(foundInventoryCord);
+            } else {
+                // Можете добавить обработку, если пользователь не найден
+                // Например, вы можете вывести сообщение об отсутствии результатов.
+            }
+        } else {
+            // Если поле поиска пустое, отобразите все пользователи
+            updateTableView();
+        }
+    }
+
+    private void searchInventoryCordLocation(String searchTerm) {
+        if (!searchTerm.isEmpty()) {
+            List<InventoryCard> foundInventoryCord = inventoryCardService.getEstateByLocationContains(searchTerm);
 
             if (!foundInventoryCord.isEmpty()) {
                 // Отображение найденных пользователей в таблице
