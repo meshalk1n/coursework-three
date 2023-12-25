@@ -121,7 +121,7 @@ public class EstateFormController {
         User currentUser = authenticatedUserService.getActiveUser();
 
         // Проверка роли пользователя
-        if (!currentUser.getRole().equals("ROLE_ADMIN") && !currentUser.getRole().equals("ROLE_ASSET_MANAGER")) {
+        if ((!currentUser.getRole().equals("ROLE_ADMIN")) && (!currentUser.getRole().equals("ROLE_ASSET_MANAGER"))) {
             // Если пользователь не является администратором, скрыть элементы
             nameField.setVisible(false);
             categoryComboBox.setVisible(false);
@@ -131,7 +131,7 @@ public class EstateFormController {
             deleteEstateButton.setVisible(false);
             updateEstateButton.setVisible(false);
             clearButton.setVisible(false);
-        }if(!currentUser.getRole().equals("ROLE_ADMIN")&& !currentUser.getRole().equals("ROLE_INVENTORY_OFFICER")){
+        }if((!currentUser.getRole().equals("ROLE_ADMIN")) && (!currentUser.getRole().equals("ROLE_INVENTORY_OFFICER"))){
             inventoryCardButton.setVisible(false);
         }
 
@@ -261,7 +261,7 @@ public class EstateFormController {
             // Обновление отображения таблицы
             updateTableView();
         } else {
-            // Если ни один пользователь не выбран, можете вывести сообщение об ошибке или предпринять другие действия.
+            // Если ни один пользователь не выбран, можно вывести сообщение об ошибке или предпринять другие действия.
         }
     }
 
@@ -273,8 +273,8 @@ public class EstateFormController {
                 // Отображение найденных пользователей в таблице
                 tableView.getItems().setAll(foundEstate);
             } else {
-                // Можете добавить обработку, если пользователь не найден
-                // Например, вы можете вывести сообщение об отсутствии результатов.
+                // Можно добавить обработку, если пользователь не найден
+                // Например, вывести сообщение об отсутствии результатов.
             }
         } else {
             // Если поле поиска пустое, отобразите все пользователи

@@ -14,4 +14,7 @@ public interface InventoryCardRepository  extends JpaRepository<InventoryCard, I
 
     // Метод для проверки, существует ли уже карточка инвентаря для данного объекта Estate
     boolean existsByEstate(Estate estate);
+
+    List<InventoryCard> findByLocationContains(String searchTerm);
+
 }

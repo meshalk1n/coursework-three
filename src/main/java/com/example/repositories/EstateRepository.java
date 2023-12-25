@@ -10,4 +10,10 @@ import java.util.List;
 public interface EstateRepository extends JpaRepository<Estate, Integer> {
 
     List<Estate> findByNameContains(String searchTerm);
+
+    List<Estate> findByCategoryContains(String searchTerm);
+
+    List<Estate> findByCost(Integer searchTerm);
+
+    List<Estate> findByConditionContains(String searchTerm);
 }

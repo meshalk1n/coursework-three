@@ -39,8 +39,8 @@ public class InventoryCardService {
             inventoryCard.setInventoryOfficer(modifiedBy);
             inventoryCardRepository.save(inventoryCard);
         } else {
-            // Можете добавить обработку, если пользователя с указанным id не существует.
-            // Например, вы можете вывести сообщение об ошибке.
+            // Можно добавить обработку, если пользователя с указанным id не существует.
+            // Например, вывести сообщение об ошибке.
         }
     }
 
@@ -50,5 +50,9 @@ public class InventoryCardService {
 
     public boolean getExistsByInventoryCard(Estate estate){
         return inventoryCardRepository.existsByEstate(estate);
+    }
+
+    public List<InventoryCard> getEstateByLocationContains(String searchTerm){
+        return inventoryCardRepository.findByLocationContains(searchTerm);
     }
 }

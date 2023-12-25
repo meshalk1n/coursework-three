@@ -38,12 +38,24 @@ public class EstateService {
             estate.setLastModifiedBy(modifiedBy);
             estateRepository.save(estate);
         } else {
-            // Можете добавить обработку, если пользователя с указанным id не существует.
-            // Например, вы можете вывести сообщение об ошибке.
+            // Можно добавить обработку, если пользователя с указанным id не существует.
+            // Например, вывести сообщение об ошибке.
         }
     }
 
     public List<Estate> getEstateByNameContains(String searchTerm){
         return estateRepository.findByNameContains(searchTerm);
+    }
+
+    public List<Estate> getEstateByCategoryContains(String searchTerm){
+        return estateRepository.findByCategoryContains(searchTerm);
+    }
+
+    public List<Estate> getEstateByCost(Integer searchTerm){
+        return estateRepository.findByCost(searchTerm);
+    }
+
+    public List<Estate> getEstateByConditionContains(String searchTerm){
+        return estateRepository.findByConditionContains(searchTerm);
     }
 }
