@@ -1,13 +1,11 @@
 package com.example.controllers;
 
-import com.example.models.Estate;
 import com.example.models.InventoryCard;
 import com.example.models.User;
 import com.example.services.AuthenticatedUserService;
 import com.example.services.InventoryCardService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -176,8 +174,8 @@ public class InventoryCardFormController {
                 // Отображение найденных пользователей в таблице
                 tableView.getItems().setAll(foundInventoryCord);
             } else {
-                // Можете добавить обработку, если пользователь не найден
-                // Например, вы можете вывести сообщение об отсутствии результатов.
+                // Можно добавить обработку, если пользователь не найден
+                // Например, вывести сообщение об отсутствии результатов.
             }
         } else {
             // Если поле поиска пустое, отобразите все пользователи
@@ -200,7 +198,7 @@ public class InventoryCardFormController {
             // Обновление отображения таблицы
             updateTableView();
         } else {
-            // Если ни один пользователь не выбран, можете вывести сообщение об ошибке или предпринять другие действия.
+            // Если ни один пользователь не выбран, можно вывести сообщение об ошибке или предпринять другие действия.
         }
     }
 

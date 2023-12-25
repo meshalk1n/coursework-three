@@ -2,7 +2,6 @@ package com.example.services;
 
 import com.example.models.Estate;
 import com.example.models.InventoryCard;
-import com.example.models.User;
 import com.example.repositories.InventoryCardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,8 +39,8 @@ public class InventoryCardService {
             inventoryCard.setInventoryOfficer(modifiedBy);
             inventoryCardRepository.save(inventoryCard);
         } else {
-            // Можете добавить обработку, если пользователя с указанным id не существует.
-            // Например, вы можете вывести сообщение об ошибке.
+            // Можно добавить обработку, если пользователя с указанным id не существует.
+            // Например, вывести сообщение об ошибке.
         }
     }
 

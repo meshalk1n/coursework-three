@@ -1,7 +1,6 @@
 package com.example.controllers;
 
 import com.example.models.User;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

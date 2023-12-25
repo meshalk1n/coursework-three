@@ -1,8 +1,6 @@
 package com.example.controllers;
 
-import com.example.models.Estate;
 import com.example.models.InventoryCard;
-import com.example.models.User;
 import com.example.services.EstateService;
 import com.example.services.InventoryCardService;
 import com.example.services.UserService;
@@ -148,8 +146,8 @@ public class ListInventoryCardFormController {
                 // Отображение найденных пользователей в таблице
                 tableView.getItems().setAll(foundInventoryCord);
             } else {
-                // Можете добавить обработку, если пользователь не найден
-                // Например, вы можете вывести сообщение об отсутствии результатов.
+                // Можно добавить обработку, если пользователь не найден
+                // Например, вывести сообщение об отсутствии результатов.
             }
         } else {
             // Если поле поиска пустое, отобразите все пользователи
@@ -165,8 +163,8 @@ public class ListInventoryCardFormController {
                 // Отображение найденных пользователей в таблице
                 tableView.getItems().setAll(foundInventoryCord);
             } else {
-                // Можете добавить обработку, если пользователь не найден
-                // Например, вы можете вывести сообщение об отсутствии результатов.
+                // Можно добавить обработку, если пользователь не найден
+                // Например, вывести сообщение об отсутствии результатов.
             }
         } else {
             // Если поле поиска пустое, отобразите все пользователи
